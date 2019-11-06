@@ -4,10 +4,15 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/emilianaR/myTinerary-team3.git"
-},
+  },
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-regular-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
     "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0"
@@ -33,5 +38,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2"
+  }
 }
