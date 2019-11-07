@@ -1,6 +1,7 @@
 import img from './images/MYtineraryLogo.png';
 import img2 from './images/circled-right-2.png';
 import React, { Component } from 'react';
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 export default class Home extends Component {
   render() {
@@ -14,7 +15,7 @@ export default class Home extends Component {
         </div>
         <div className="w-20 p-3">
           <button className="btn w-25 m-auto d-block">
-              <img className="w-100" src={img2} alt="button2" />
+              <Link to="/cities"><img className="w-100" src={img2} alt="button2" /></Link>
           </button>
         </div>
       </div>);
