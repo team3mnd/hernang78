@@ -4,7 +4,15 @@ import {render} from 'react-dom';
 import img from './images/MYtineraryLogo.png';
 import img2 from './images/circled-right-2.png';
 import BottonAccess from './componentes/componentes.js';
-import Carousel from './componentes/Carousel/Carousel';
+import Carousel2 from './componentes/Carousel2/Carousel2';
+
+import Carousel from 'react-bootstrap-carousel';
+import "bootstrap/dist/css/bootstrap.css";
+import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 
 var root = document.getElementById('root');
 
@@ -31,7 +39,7 @@ class App extends Component {
           <BottonAccess title="Log in"></BottonAccess>
           <BottonAccess title="Create Account"></BottonAccess>
         </div>
-        <Carousel />
+        <Carousel2 />
       </div>
       );
   }
