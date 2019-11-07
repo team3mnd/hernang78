@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 import img from './images/MYtineraryLogo.png';
 import img2 from './images/circled-right-2.png';
-import BottonAccess from './componentes/componentes.js'
+import BottonAccess from './componentes/componentes.js';
+import Carousel from './componentes/Carousel/Carousel';
 
 var root = document.getElementById('root');
 
@@ -20,7 +21,7 @@ class App extends Component {
         <div className=" my-5 w-100">
           <h2 className="m-auto w-50">Start browsing</h2>
           <button className="btn w-25 m-auto d-block">
-            <a href>
+            <a href="#">
               <img className="w-100" src={img2} alt="button2" />
             </a>
           </button>
@@ -30,6 +31,7 @@ class App extends Component {
           <BottonAccess title="Log in"></BottonAccess>
           <BottonAccess title="Create Account"></BottonAccess>
         </div>
+        <Carousel />
       </div>
       );
   }
