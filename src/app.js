@@ -3,7 +3,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.js';
 import React, { Component } from 'react';
 import img from './images/MYtineraryLogo.png';
 import img2 from './images/circled-right-2.png';
-import BottonAccess from './componentes/componentes.js'
 import Nav from './componentes/nav.js'
 
 export default class App extends Component {
@@ -11,7 +10,7 @@ export default class App extends Component {
     return (
       <div className="w-100 d-flex flex-column justify-content-center align-items-center">
         <Nav />
-        <div className="pb-3">
+        <div className="pb-5">
           <img alt="text" className="m-auto w-50 d-block pt-3" src={img} />
         </div>
         <div className="bg-dark text-white rounded">
