@@ -1,0 +1,27 @@
+/* .MainNavbar {
+    background-color: rgb(255, 126, 126);
+    color           : rgb(68, 68, 68);
+    text-align      : center;
+    border          : 5px solid rgb(166, 219, 255);
+}
+ */
+
+ .navItem, .navItem:hover{
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.NavMainDrop {
+    position: absolute !important;
+    top: 8%;
+}
+
+.navbar-nav .dropdown-menu {
+    position: absolute !important;
+}
+
+.NavOptions {
+    position: absolute;
+    right: 0;
+}

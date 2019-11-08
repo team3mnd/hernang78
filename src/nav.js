@@ -5,39 +5,34 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faCity } from '@fortawesome/free-solid-svg-icons';
-import BottonAccess from './componentes/componentes';
+import "./css/NavbarMain.css";
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
-class Nav extends React.Component {
+export default class NavbarMain extends React.Component {
   render() {
     return (
-        <nav className="navbar navbar-expand-md sticky-top navbar-dark bg-dark w-100">
-
-          <button className="navbar-toggler" data-toggle="collapse" data-target="#menu">
-            <FontAwesomeIcon icon={faBars} />
-          </button>
-
-          <div className="collapse navbar-collapse" id="menu" >
-            <ul className="navbar-nav"  >
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <FontAwesomeIcon icon={faUserCircle} /> Acount
-        </a>
-                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <Link to="/login" className="dropdown-item">Log in</Link>
-                  <Link to="/signup" className="dropdown-item">Create Acount</Link>
-                </div>
-              </li>
-              <li className="nav-item">
-                <Link to="/" className="nav-link active" ><FontAwesomeIcon icon={faHome} /> Home</Link>
-              </li>
-              <li>
-                <Link to="/cities" className="nav-link active"><FontAwesomeIcon icon={faCity} /> Cities</Link>
-              </li>
-            </ul>
+      <div className="MainNavbar">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+          <Nav className="mr-auto">
+            <NavDropdown title="User" id="collasible-nav-dropdown" className="NavMainDrop">
+              <NavDropdown.Item><Link to="/signup" className="dropdown-item"><FontAwesomeIcon icon={faUserCircle} /> Create Acount</Link></NavDropdown.Item>
+              <NavDropdown.Item><Link to="/login" className="dropdown-item">Log in</Link></NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <div className="NavOption">
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav>
+                <Link to="/" className="text-right navItem"><FontAwesomeIcon icon={faHome} /> Home</Link>
+                <Link to="/cities" className="text-right navItem"><FontAwesomeIcon icon={faCity} /> Cities</Link>
+              </Nav>
+            </Navbar.Collapse>
           </div>
-        </nav>
+        </Navbar>
+      </div>
+
     );
   }
 }
-
-export default Nav;
