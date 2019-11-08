@@ -16,9 +16,9 @@ export default class Home extends Component {
           <p className="text-center p-3">Find your perfect trip, designed by insiders who know and love their cities</p>
         </div>
         <div className="w-20 p-3">
-          <button className="btn w-25 m-auto d-block">
+          <div className="btn w-25 m-auto d-block">
               <Link to="/cities"><img className="w-100" src={img2} alt="button2" /></Link>
-          </button>
+          </div>
         </div>
         <Carousel2 />
       </div>);
