@@ -18,11 +18,11 @@ class Nav extends React.Component {
 
           <div className="collapse navbar-collapse" id="menu" >
             <ul className="navbar-nav"  >
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <FontAwesomeIcon icon={faUserCircle} /> Acount
         </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <Link to="/login" className="dropdown-item">Log in</Link>
                   <Link to="/signup" className="dropdown-item">Create Acount</Link>
                 </div>

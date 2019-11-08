@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.js';
 import React, { Component } from 'react';
 import Nav from './nav'
 import Cities from './cities';
