@@ -9,8 +9,6 @@ import Signup from './signup';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import NavbarMain from './nav';
 import Carousel2 from './componentes/Carousel2/Carousel2';
-import Carousel from 'react-bootstrap-carousel';
-import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
