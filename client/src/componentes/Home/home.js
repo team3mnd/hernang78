@@ -1,8 +1,8 @@
-import img from './images/MYtineraryLogo.png';
-import img2 from './images/circled-right-2.png';
+import img from '../../images/MYtineraryLogo.png';
+import img2 from '../../images/circled-right-2.png';
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
-import Carousel2 from './componentes/Carousel2/Carousel2';
+import Carousel2 from '../Carousel2/Carousel2';
 import './home.css';
 
 export default class Home extends Component {

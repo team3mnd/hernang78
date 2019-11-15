@@ -1,0 +1,20 @@
+.CityListItem {
+  list-style-type: none
+}
+
+.CountryBtn {
+  width           : 80%;
+  height          : 40px;
+  color           : black;
+  border          : 2px solid rgba(226, 62, 62, 0.883);
+  border-radius   : 10px;
+  /* background-image: url("../images/img-ln.jpg") */
+}
+
+.CityInput {
+  width: 100%;
+}
+
+.NoCityDiv {
+  height: 420px
+}
