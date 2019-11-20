@@ -1,8 +1,5 @@
 #imgPrimary{
-  width: 250px;
-  height: 130px;
+  width: 80%;
+  max-width: 600px;
 }
 
-#containerImg{
-  height: 140px;
-}
