@@ -1,20 +1,26 @@
+.CityInput{
+  width: 90%;
+  margin: 5px auto;
+  border: 1px solid grey;
+  margin: 3px 10px;
+}
+
 .CityListItem {
-  list-style-type: none
-}
-
-.CountryBtn {
-  width           : 80%;
-  height          : 40px;
-  color           : black;
-  border          : 2px solid rgba(226, 62, 62, 0.883);
-  border-radius   : 10px;
-  /* background-image: url("../images/img-ln.jpg") */
-}
-
-.CityInput {
   width: 100%;
+  position: relative;
+  display: inline-block;
+  text-align: center;
 }
 
-.NoCityDiv {
-  height: 420px
+.CityListItem img{
+  width: 80%;
+  margin: 10px auto;
+  border-radius: 5px;
+  box-shadow: 0 8px 17px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);
 }
+
+.CityListItem h5{
+  margin-top: -10px;
+  color: rgb(20, 20, 20);
+}
+
