@@ -22,7 +22,7 @@ export default class App extends Component {
         <NavbarMain />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/cities/:id" component={Itinerary} />
+          <Route path="/cities/:country/:city" component={Itinerary} />
           <Route path="/cities" component={Cities} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
