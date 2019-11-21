@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 
-export default class Itinerary extends Component {
+
+class Itinerary extends Component {
+
     render() {
+        console.log(this.props)
         return (
             <div>
-                Itinerary
             </div>
         )
     }
 }
+
+export default Itinerary
