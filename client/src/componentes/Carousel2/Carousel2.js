@@ -32,7 +32,7 @@ let backs = [
 export class Carousel2 extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div style={{background: "#343a40", padding: "10px"}}>
         <Carousel>
           <Carousel.Item>
             <SlidePack setimg={ backs.slice(0, 4) } />

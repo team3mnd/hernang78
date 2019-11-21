@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { DebounceInput } from 'react-debounce-input';
-import './cities.css';
-import { Link } from 'react-router-dom';
+
+import React, { Component } from "react";
+import "./cities.css";
+import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 
 
@@ -10,113 +10,84 @@ class Cities extends Component {
     super();
     this.state = {
       cities: [],
-      filteredCities: []
+      filteredCities: [],
+      loading: true
     };
   }
 
   fetchCities() {
-    fetch('/cities')
+    fetch("/cities")
       .then(response => response.json())
-      .then(cities => this.setState({ cities, filteredCities: cities }))
+      .then(cities =>
+        this.setState({ cities, filteredCities: cities, loading: false })
+      )
       .catch(err => console.log(err));
-
   }
 
   componentDidMount() {
     this.fetchCities();
   }
 
-  filterCities = (cityFilter) => {
-    let filteredCities = this.state.cities
+  filterCities = cityFilter => {
+    let filteredCities = this.state.cities;
 
-    filteredCities = filteredCities.filter((city) => {
-      let cityName = city.name.toLowerCase()
-      if (cityName.startsWith(cityFilter)) {
-        return cityName.indexOf(
-          cityFilter.toLowerCase()) !== -1
-      }
-    })
-
+    filteredCities = filteredCities.filter(cities => {
+      let name = cities.name.toLowerCase();
+      return name.startsWith(cityFilter);
+    });
     this.setState({
       filteredCities
-    })
-  }
+    });
+  };
 
-  handleChange = (e) => {
-    this.filterCities(e.target.value)
-  }
-
-  cityList() {
-    return <ul className="mx-0 mt-4 mb-2 p-0">
-      {this.state.filteredCities.sort((a, b) => {
-        if (a.name > b.name) {
-          return 1;
-        }
-        if (a.name < b.name) {
-          return -1;
-        }
-        // a must be equal to b
-        return 0;
-      }).map(city => {
-        let link = "/" + city.name;
-        return <li className="CityListItem text-center m-1" key={city.name}>
-          <Link to={link} className="">
-            <button className="CountryBtn">
-              {city.name} >>> {city.country}
-            </button>
-          </Link>
-        </li>
-      })}
-    </ul>
-  }
-
-  noCity() {
-    if (this.state.filteredCities.length === 0) {
-      return <div className="NoCityDiv"> <h5 className="text-center align-self-center">Sorry, no city found :/</h5> </div>
-    }
-  }
+  handleChange = e => {
+    this.filterCities(e.target.value.toLowerCase());
+  };
 
   render() {
-
+    const { filteredCities, loading } = this.state;
     return (
       <div className="row m-0 p-0">
         <div className="col-12 p-0">
           <label htmlFor="filter">Filter by City name: </label>
-          {/* <input type="text" id="filter"
-            onChange={this.handleChange} /> */}
-          <DebounceInput
-            placeholder="ej: Rome"
+          <input
+            placeholder="Example: Rome"
             className="text-center CityInput"
             id="filter"
-            ref="CityInput"
-            minLength={1}
-            debounceTimeout={500}
             onChange={this.handleChange}
           />
-          {/* <h2>Cities</h2> */}
-          {/* this.cityList() */}
           <ul className="mx-0 mt-4 mb-2 p-0">
-            {this.state.filteredCities.sort((a, b) => {
-              if (a.name > b.name) {
-                return 1;
-              }
-              if (a.name < b.name) {
-                return -1;
-              }
-              // a must be equal to b
-              return 0;
-            }).map(city => {
-              let linkCity = "/" + city.name;
-              return <li className="CityListItem text-center m-1" key={city.name}>
-                <Link to={linkCity} className="">
-                  <button className="CountryBtn">
-                    {city.name} >>> {city.country}
-                  </button>
-                </Link>
-              </li>
-            })}
+            {loading ? (
+              <h5 style={{ textAlign: "center" }}>"Loading cities..."</h5>
+            ) : filteredCities.length === 0 ? (
+              "City no found =("
+            ) : (
+              <div className="CityListItem text-center m-1">
+                {filteredCities
+                  .sort((a, b) => {
+                    if (a.name > b.name) {
+                      return 1;
+                    }
+                    if (a.name < b.name) {
+                      return -1;
+                    }
+                    return 0;
+                  })
+                  .map(city => {
+                    return (
+                      <Link to={`/cities/${city.name}`} key={city._id}>
+                        <img
+                          src={city.url}
+                          alt={city.name}
+                          className="imageList"
+                        />
+                        <h5>{city.name}</h5>
+                      </Link>
+                    );
+                  })}
+              </div>
+            )}
           </ul>
-          {this.noCity()}
         </div>
       </div>
     );
