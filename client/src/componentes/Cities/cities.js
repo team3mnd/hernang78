@@ -2,6 +2,8 @@ import React, { Component } from "react";
 // import { DebounceInput } from "react-debounce-input";
 import "./cities.css";
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux'
+import {getAllCities} from '../../store/actions/citiesActions'
 
 class Cities extends Component {
   constructor() {
@@ -13,17 +15,17 @@ class Cities extends Component {
     };
   }
 
-  fetchCities() {
-    fetch("/cities")
-      .then(response => response.json())
-      .then(cities =>
-        this.setState({ cities, filteredCities: cities, loading: false })
-      )
-      .catch(err => console.log(err));
-  }
+  // fetchCities() {
+  //   fetch("/cities")
+  //     .then(response => response.json())
+  //     .then(cities =>
+  //       this.setState({ cities, filteredCities: cities, loading: false })
+  //     )
+  //     .catch(err => console.log(err));
+  // }
 
   componentDidMount() {
-    this.fetchCities();
+    this.props.getCities();
   }
 
   filterCities = cityFilter => {
@@ -92,4 +94,16 @@ class Cities extends Component {
   }
 }
 
-export default Cities;
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    cities: state
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getCities: () => dispatch(getAllCities) 
+}}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);
