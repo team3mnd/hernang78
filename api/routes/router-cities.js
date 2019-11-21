@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const City = require('../models/city');
+const itinerary = require('../models/itinerary');
 
 router.get('/', (req, res) => {
   City.find()
@@ -15,9 +16,8 @@ router.get('/', (req, res) => {
 router.get('/:country/:city',(req,res)=>{
   let nameCity = req.params.city;
   let nameCountry = req.params.country;
-  console.log(typeof nameCity,nameCity)
-    City
-    .find({name: nameCity,country: nameCountry})
+    itinerary
+    .find()
     .then((result)=>{
       console.log(result)
       res.send(result)
