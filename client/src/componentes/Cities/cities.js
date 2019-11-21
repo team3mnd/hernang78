@@ -103,7 +103,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCities: () => dispatch(getAllCities()) 
+    getCities: () => dispatch(getAllCities) 
 }}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);
