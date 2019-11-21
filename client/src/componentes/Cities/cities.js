@@ -2,8 +2,8 @@
 import React, { Component } from "react";
 import "./cities.css";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux';
-
+import {connect} from 'react-redux'
+import {getAllCities} from '../../store/actions/citiesActions'
 
 class Cities extends Component {
   constructor() {
@@ -15,17 +15,17 @@ class Cities extends Component {
     };
   }
 
-  fetchCities() {
-    fetch("/cities")
-      .then(response => response.json())
-      .then(cities =>
-        this.setState({ cities, filteredCities: cities, loading: false })
-      )
-      .catch(err => console.log(err));
-  }
+  // fetchCities() {
+  //   fetch("/cities")
+  //     .then(response => response.json())
+  //     .then(cities =>
+  //       this.setState({ cities, filteredCities: cities, loading: false })
+  //     )
+  //     .catch(err => console.log(err));
+  // }
 
   componentDidMount() {
-    this.fetchCities();
+    this.props.getCities();
   }
 
   filterCities = cityFilter => {
@@ -94,18 +94,16 @@ class Cities extends Component {
   }
 }
 
-
-
-const mapStateToProps = (state) =>{
-  return{
-    cities: state.cities
-  }
-}
-
-const mapDispatchToProps = (dispatch) =>{
-  return{
-    addCity: (city) => {dispatch({type:'ADD_CITY', payload: city})}
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    cities: state
   }
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getCities: () => dispatch(getAllCities) 
+}}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);
