@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import './cities.css';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 
 class Cities extends Component {
   constructor() {
@@ -121,4 +123,18 @@ class Cities extends Component {
   }
 }
 
-export default Cities;
+
+
+const mapStateToProps = (state) =>{
+  return{
+    cities: state.cities
+  }
+}
+
+const mapDispatchToProps = (dispatch) =>{
+  return{
+    addCity: (city) => {dispatch({type:'ADD_CITY', payload: city})}
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);
