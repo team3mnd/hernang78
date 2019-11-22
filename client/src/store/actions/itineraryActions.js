@@ -8,8 +8,8 @@ const fetchData = (itineraryCities) => {
     }
 }
 
-export const getItinerary= (pathname) => (dispatch) => {
-    fetch(pathname, {method: "GET"})
+export const getItinerary = (pathname) => async (dispatch) => {
+    await fetch(pathname, {method: "GET"})
     .then(response => response.json())
     .then(itineraryCities => {
         dispatch(fetchData(itineraryCities))

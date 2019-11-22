@@ -12,13 +12,13 @@ class Cities extends Component {
     loading: true
   };
 
-  async cargarPage(){
+  async cargarPage() {
     await this.props.getCities()
-      this.setState({
-        cities: this.props.cities,
-        filteredCities: this.props.cities,
-        loading: false
-      });
+    this.setState({
+      cities: this.props.cities,
+      filteredCities: this.props.cities,
+      loading: false
+    });
   }
 
   componentDidMount() {
@@ -59,31 +59,31 @@ class Cities extends Component {
             ) : filteredCities.length === 0 ? (
               "City no found =("
             ) : (
-              <div className="CityListItem text-center m-1">
-                {filteredCities
-                  .sort((a, b) => {
-                    if (a.name > b.name) {
-                      return 1;
-                    }
-                    if (a.name < b.name) {
-                      return -1;
-                    }
-                    return 0;
-                  })
-                  .map(city => {
-                    return (
-                      <Link to={`/cities/${city.country}/${city.name}`} key={city._id}>
-                        <img
-                          src={city.url}
-                          alt={city.name}
-                          className="imageList"
-                        />
-                        <h5>{city.name}</h5>
-                      </Link>
-                    );
-                  })}
-              </div>
-            )}
+                  <div className="CityListItem text-center m-1">
+                    {filteredCities
+                      .sort((a, b) => {
+                        if (a.name > b.name) {
+                          return 1;
+                        }
+                        if (a.name < b.name) {
+                          return -1;
+                        }
+                        return 0;
+                      })
+                      .map(city => {
+                        return (
+                          <Link to={`/cities/${city.country}/${city.name}`} key={city._id}>
+                            <img
+                              src={city.url}
+                              alt={city.name}
+                              className="imageList"
+                            />
+                            <h5>{city.name}</h5>
+                          </Link>
+                        );
+                      })}
+                  </div>
+                )}
           </ul>
         </div>
       </div>
@@ -93,8 +93,7 @@ class Cities extends Component {
 
 const mapStateToProps = state => {
   return {
-    cities: state.cityReducer.cities,
-    loadingRedux: false
+    cities: state.cityReducer.cities
   };
 };
 
