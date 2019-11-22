@@ -12,11 +12,6 @@ class Cities extends Component {
     loading: true
   };
 
-
-
-  componentDidMount() {
-    this.props.getCities();
-
   async cargarPage(){
     await this.props.getCities()
       this.setState({
@@ -77,7 +72,7 @@ class Cities extends Component {
                   })
                   .map(city => {
                     return (
-                      <Link to={`/cities/${city.name}`} key={city._id}>
+                      <Link to={`/cities/${city.country}/${city.name}`} key={city._id}>
                         <img
                           src={city.url}
                           alt={city.name}
