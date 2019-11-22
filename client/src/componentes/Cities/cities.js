@@ -2,34 +2,31 @@
 import React, { Component } from "react";
 import "./cities.css";
 import { Link } from "react-router-dom";
-import { connect } from 'react-redux'
-import { getAllCities } from '../../store/actions/citiesActions'
+import { connect } from "react-redux";
+import { getAllCities } from "../../store/actions/citiesActions";
 
 class Cities extends Component {
-  constructor() {
-    super();
-    this.state = {
-      cities: [],
-      filteredCities: [],
+  state = {
+    cities: [],
+    filteredCities: [],
+    loading: true
+  };
+
+  async cargarPage() {
+    await this.props.getCities()
+    this.setState({
+      cities: this.props.cities,
+      filteredCities: this.props.cities,
       loading: false
-    };
+    });
   }
 
-  // fetchCities() {
-  //   fetch("/cities")
-  //     .then(response => response.json())
-  //     .then(cities =>
-  //       this.setState({ cities, filteredCities: cities, loading: false })
-  //     )
-  //     .catch(err => console.log(err));
-  // }
-
   componentDidMount() {
-    this.props.getCities();
+    this.cargarPage()
   }
 
   filterCities = cityFilter => {
-    let filteredCities = this.props.cities;
+    let filteredCities = this.state.cities;
 
     filteredCities = filteredCities.filter(cities => {
       let name = cities.name.toLowerCase();
@@ -59,11 +56,11 @@ class Cities extends Component {
           <ul className="mx-0 mt-4 mb-2 p-0">
             {loading ? (
               <h5 style={{ textAlign: "center" }}>"Loading cities..."</h5>
-            ) : this.props.cities.length === 0 ? (
+            ) : filteredCities.length === 0 ? (
               "City no found =("
             ) : (
                   <div className="CityListItem text-center m-1">
-                    {this.props.cities
+                    {filteredCities
                       .sort((a, b) => {
                         if (a.name > b.name) {
                           return 1;
@@ -94,17 +91,16 @@ class Cities extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state)
+const mapStateToProps = state => {
   return {
     cities: state.cityReducer.cities
-  }
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCities: () => dispatch(getAllCities)
-  }
-}
+    getCities: () => dispatch(getAllCities())
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);
