@@ -9,7 +9,8 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CITIES:
-      return Object.assign({}, state, action.cities);
+      // return Object.assign({}, state, action.cities);
+      return {... state, cities : action.cities};
     default:
       return state;
   }

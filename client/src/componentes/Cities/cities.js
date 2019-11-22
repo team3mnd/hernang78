@@ -2,8 +2,8 @@
 import React, { Component } from "react";
 import "./cities.css";
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux'
-import {getAllCities} from '../../store/actions/citiesActions'
+import { connect } from 'react-redux'
+import { getAllCities } from '../../store/actions/citiesActions'
 
 class Cities extends Component {
   constructor() {
@@ -11,7 +11,7 @@ class Cities extends Component {
     this.state = {
       cities: [],
       filteredCities: [],
-      loading: true
+      loading: false
     };
   }
 
@@ -29,7 +29,7 @@ class Cities extends Component {
   }
 
   filterCities = cityFilter => {
-    let filteredCities = this.state.cities;
+    let filteredCities = this.props.cities;
 
     filteredCities = filteredCities.filter(cities => {
       let name = cities.name.toLowerCase();
@@ -59,34 +59,34 @@ class Cities extends Component {
           <ul className="mx-0 mt-4 mb-2 p-0">
             {loading ? (
               <h5 style={{ textAlign: "center" }}>"Loading cities..."</h5>
-            ) : filteredCities.length === 0 ? (
+            ) : this.props.cities.length === 0 ? (
               "City no found =("
             ) : (
-              <div className="CityListItem text-center m-1">
-                {filteredCities
-                  .sort((a, b) => {
-                    if (a.name > b.name) {
-                      return 1;
-                    }
-                    if (a.name < b.name) {
-                      return -1;
-                    }
-                    return 0;
-                  })
-                  .map(city => {
-                    return (
-                      <Link to={`/cities/${city.name}`} key={city._id}>
-                        <img
-                          src={city.url}
-                          alt={city.name}
-                          className="imageList"
-                        />
-                        <h5>{city.name}</h5>
-                      </Link>
-                    );
-                  })}
-              </div>
-            )}
+                  <div className="CityListItem text-center m-1">
+                    {this.props.cities
+                      .sort((a, b) => {
+                        if (a.name > b.name) {
+                          return 1;
+                        }
+                        if (a.name < b.name) {
+                          return -1;
+                        }
+                        return 0;
+                      })
+                      .map(city => {
+                        return (
+                          <Link to={`/cities/${city.name}`} key={city._id}>
+                            <img
+                              src={city.url}
+                              alt={city.name}
+                              className="imageList"
+                            />
+                            <h5>{city.name}</h5>
+                          </Link>
+                        );
+                      })}
+                  </div>
+                )}
           </ul>
         </div>
       </div>
@@ -97,13 +97,14 @@ class Cities extends Component {
 const mapStateToProps = (state) => {
   console.log(state)
   return {
-    cities: state
+    cities: state.cityReducer.cities
   }
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCities: () => dispatch(getAllCities) 
-}}
+    getCities: () => dispatch(getAllCities)
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);

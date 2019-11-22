@@ -2,7 +2,6 @@ import {GET_CITIES} from '../constants'
 
 const fetchDataCities = (cities) => {
     return {
-        // siempre el que importe
         type: GET_CITIES,
         cities
     }
