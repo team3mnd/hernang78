@@ -20,4 +20,4 @@ const itinerarySchema = new Schema({
     creationDate : Date
 });
 
-module.exports = mongoose.model('itinerary', itinerarySchema);
+module.exports = mongoose.model('itinerary', itinerarySchema,'itinerary');

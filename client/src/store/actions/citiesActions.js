@@ -1,3 +1,4 @@
+
 import { GET_CITIES } from "../constants";
 
 const fetchDataCities = cities => {
@@ -16,3 +17,4 @@ export const getAllCities = () => async dispatch => {
     })
     .catch(err => console.log(err));
 };
+

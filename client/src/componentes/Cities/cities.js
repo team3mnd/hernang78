@@ -5,12 +5,18 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllCities } from "../../store/actions/citiesActions";
 
+
 class Cities extends Component {
   state = {
     cities: [],
     filteredCities: [],
     loading: true
   };
+
+
+
+  componentDidMount() {
+    this.props.getCities();
 
   async cargarPage(){
     await this.props.getCities()
@@ -105,3 +111,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);
+
