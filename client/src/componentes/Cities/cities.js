@@ -2,30 +2,33 @@ import React, { Component } from "react";
 // import { DebounceInput } from "react-debounce-input";
 import "./cities.css";
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux'
-import {getAllCities} from '../../store/actions/citiesActions'
+import { connect } from "react-redux";
+import { getAllCities } from "../../store/actions/citiesActions";
+
 
 class Cities extends Component {
-  constructor() {
-    super();
-    this.state = {
-      cities: [],
-      filteredCities: [],
-      loading: true
-    };
-  }
+  state = {
+    cities: [],
+    filteredCities: [],
+    loading: true
+  };
 
-  // fetchCities() {
-  //   fetch("/cities")
-  //     .then(response => response.json())
-  //     .then(cities =>
-  //       this.setState({ cities, filteredCities: cities, loading: false })
-  //     )
-  //     .catch(err => console.log(err));
-  // }
+
 
   componentDidMount() {
     this.props.getCities();
+
+  async cargarPage(){
+    await this.props.getCities()
+      this.setState({
+        cities: this.props.cities,
+        filteredCities: this.props.cities,
+        loading: false
+      });
+  }
+
+  componentDidMount() {
+    this.cargarPage()
   }
 
   filterCities = cityFilter => {
@@ -94,16 +97,18 @@ class Cities extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state)
+const mapStateToProps = state => {
   return {
-    cities: state
-  }
+    cities: state.cityReducer.cities,
+    loadingRedux: false
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getCities: () => dispatch(getAllCities) 
-}}
+    getCities: () => dispatch(getAllCities())
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);
+
