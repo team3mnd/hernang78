@@ -10,7 +10,7 @@ class Itinerary extends Component {
   render() {
     return (
       <div>
-        {this.props.itineraryCity}
+        {console.log(this.props.itineraryCity)}
       </div>
     )
   }
@@ -18,7 +18,7 @@ class Itinerary extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        itineraryCity: state.itineraryCity
+        itineraryCity: state.itineraryReducer.itineraryCity
     }
 };
 

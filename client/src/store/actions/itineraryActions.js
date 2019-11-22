@@ -11,8 +11,9 @@ const fetchData = (itineraryCities) => {
 export const getItinerary= (pathname) => (dispatch) => {
     fetch(pathname, {method: "GET"})
     .then(response => response.json())
-    .then(itineraryCities => { 
+    .then(itineraryCities => {
         dispatch(fetchData(itineraryCities))
+        //console.log(fetchData(itineraryCities))
     })
     .catch(err => console.log(err));
 }

@@ -9,7 +9,12 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_ITINERARY:
-      return Object.assign({}, state, action.itineraryCities);
+      //return Object.assign({}, state, action.itineraryCities);
+      let newState = {
+        ...state
+      }
+      newState.itineraryCity = action.itineraryCities
+      return newState
     default:
       return state;
   }
