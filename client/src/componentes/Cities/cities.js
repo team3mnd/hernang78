@@ -3,37 +3,33 @@ import "./cities.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllCities } from "../../store/actions/citiesActions";
+import Loading from '../Loading';
 
 
 class Cities extends Component {
   state = {
-    cities: [],
-    filteredCities: [],
-    loading: true
-  };
-
-  async cargarPage() {
-    await this.props.getCities()
-    this.setState({
-      cities: this.props.cities,
-      filteredCities: this.props.cities,
-      loading: false
-    });
+    filteredCities: []
   }
 
   componentDidMount() {
-    this.cargarPage()
+    this.props.getCities()
+
   }
 
-  filterCities = cityFilter => {
-    let filteredCities = this.state.cities;
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.setState({
+      filteredCities: nextProps.cities
+    })
+  }
 
-    filteredCities = filteredCities.filter(cities => {
+  filterCities = valueInput => {
+    let resultFilter = this.props.cities
+    resultFilter = resultFilter.filter(cities => {
       let name = cities.name.toLowerCase();
-      return name.startsWith(cityFilter);
+      return name.startsWith(valueInput);
     });
     this.setState({
-      filteredCities
+      filteredCities: resultFilter
     });
   };
 
@@ -42,7 +38,7 @@ class Cities extends Component {
   };
 
   render() {
-    const { filteredCities, loading } = this.state;
+    const { filteredCities } = this.state;
     return (
       <div className="row m-0 p-0">
         <div className="col-12 p-0">
@@ -54,11 +50,12 @@ class Cities extends Component {
             onChange={this.handleChange}
           />
           <ul className="mx-0 mt-4 mb-2 p-0">
-            {loading ? (
-              <h5 style={{ textAlign: "center" }}>"Loading cities..."</h5>
-            ) : filteredCities.length === 0 ? (
-              "City no found =("
-            ) : (
+            {this.props.loading ? (
+              <Loading></Loading>
+
+            ) : filteredCities.length === 0 ?
+                <h5 className='text-center'>City not found</h5>
+                : (
                   <div className="CityListItem text-center m-1">
                     {filteredCities
                       .sort((a, b) => {
@@ -93,7 +90,8 @@ class Cities extends Component {
 
 const mapStateToProps = state => {
   return {
-    cities: state.cityReducer.cities
+    cities: state.cityReducer.cities,
+    loading: state.cityReducer.isFetching
   };
 };
 
