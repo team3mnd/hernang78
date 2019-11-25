@@ -1,0 +1,68 @@
+
+// Funcionales
+import React, { Component } from 'react';
+// Estilo
+import './Itinerary.css'
+// Conexion
+import { connect } from "react-redux";
+import { getItinerary } from '../../store/actions/itineraryActions.js';
+// Components
+import Itinerary from './Itinerary'
+
+
+class ListItinerary extends Component {
+  state = {
+    listItinerary: [],
+    loading: true
+  }
+
+  async getItinerary() {
+    await this.props.setItinerary(this.props.match.url)
+    setTimeout(() => {
+      this.setState({
+        listItinerary: this.props.itineraryCity,
+        loading: false
+      })
+    }, 1500);
+  }
+
+  componentDidMount() {
+    this.getItinerary()
+  }
+
+  render() {
+    const { loading, listItinerary } = this.state
+    return (
+      <>
+        {loading ?
+          "Loading.."
+          :
+          <div className="containerListItinerary">
+            {listItinerary.map((itinerary, i) => (
+              <Itinerary key={i} itinerary={itinerary}/>
+            ))}
+          </div>
+        }
+
+      </>
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    itineraryCity: state.itineraryReducer.itineraryCity
+  }
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setItinerary: (pathname) => {
+    dispatch(getItinerary(pathname))
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListItinerary);
+
+
+
+
