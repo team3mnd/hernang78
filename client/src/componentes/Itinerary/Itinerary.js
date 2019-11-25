@@ -26,7 +26,7 @@ class Itinerary extends Component {
     this.getItinerary()
   }
 
-  clickExpand(e){
+  clickExpand(e) {
     console.log(e)
     this.setState({
       expandActivities: !this.state.expandActivities
@@ -46,13 +46,13 @@ class Itinerary extends Component {
             <div>
               <h1 className='text-center'>{listItinerary[0].nameCity}</h1>
             </div>
-            <h5>Available Mytineraries:</h5>
+            <h5 className="ml-2">Available Mytineraries:</h5>
             <div className='container-listItinerary'>
               {listItinerary.map((itinerary, p) =>
                 <div className='container-itinerary' key={itinerary._id}>
                   <div className='wrapper-itinerary d-flex flex-row align-items-center justify-content-around'>
                     <div className='container-author w-20'>
-                      <img src={image1} alt="imageProfiler" width="50%" style={{borderRadius: "50%"}} />
+                      <img src={image1} alt="imageProfiler" width="50%" style={{ borderRadius: "50%" }} />
                       <p>{itinerary.author}</p>
                       {/* <p>{itinerary.picturePath}</p> */}
                     </div>
@@ -76,9 +76,12 @@ class Itinerary extends Component {
                     </div>
                   </div>
                   {
-                    this.state.expandActivities && <Activities  listActivities={itinerary}/>
+                    this.state.expandActivities && <Activities listActivities={itinerary} />
                   }
-                  <button onClick={() => this.clickExpand(p)}>View all</button>
+                  <div className="d-flex justify-content-center pb-2">
+                    <button className="btn btn-outline-info" onClick={() => this.clickExpand(p)}>View all</button>
+                  </div>
+
                 </div>
               )}
             </div>
