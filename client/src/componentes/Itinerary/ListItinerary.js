@@ -1,6 +1,7 @@
 
 // Funcionales
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 // Estilo
 import './Itinerary.css'
 // Conexion
@@ -8,6 +9,7 @@ import { connect } from "react-redux";
 import { getItinerary } from '../../store/actions/itineraryActions.js';
 // Components
 import Itinerary from './Itinerary'
+
 
 
 class ListItinerary extends Component {
@@ -37,11 +39,16 @@ class ListItinerary extends Component {
         {loading ?
           "Loading.."
           :
+          <>
           <div className="containerListItinerary">
             {listItinerary.map((itinerary, i) => (
               <Itinerary key={i} itinerary={itinerary}/>
             ))}
           </div>
+          <div className="d-flex justify-content-center">
+            <Link to="/cities">Choose another city</Link>
+          </div>
+          </>
         }
 
       </>

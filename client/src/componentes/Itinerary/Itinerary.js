@@ -38,15 +38,17 @@ export default class Iti extends Component {
             </div>
             <div className="w-100 d-flex flex-row flex-wrap">
               {hashtags.map((hash, i) => (
-                    <span key={i} className="badge badge-secondary m-1">{hash}</span>
+                <span key={i} className="badge badge-secondary m-1">{hash}</span>
               ))}
             </div>
           </div>
         </div>
         <div className="containerActivities">
-          <button onClick={() => this.setState({ expand: !this.state.expand })}>
-            Expand
+          <div className="d-flex justify-content-center pb-2">
+            <button className="btn btn-outline-info" onClick={() => this.setState({ expand: !this.state.expand })}>
+              View All
           </button>
+          </div>
           {expand && <Activities activities={itinerary.activities} />}
         </div>
       </div>
