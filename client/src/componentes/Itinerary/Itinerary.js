@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import image1 from "../../images/profile/GaudiLover.png";
 import "./Itinerary.css";
 
-import Activities from "../Activities/activities";
+import Card from "./card.js";
 
 export default class Iti extends Component {
   state = {
@@ -20,13 +20,11 @@ export default class Iti extends Component {
 
   render() {
     const { itinerary, expand, hashtags } = this.state;
-    console.log(itinerary.hashtags);
     return (
       <div className="containerItinerary">
         <div className="wrapperItinerary">
           <div className="profilePicture">
-            {/* {itinerary.picturePath} */}
-            <img src={image1} alt="imageProfile" id="imageProfile" />
+            <img src={itinerary.pictureId} alt="imageProfile" id="imageProfile" />
             {itinerary.author}
           </div>
           <div className="infoItinerary">
@@ -49,7 +47,7 @@ export default class Iti extends Component {
               View All
           </button>
           </div>
-          {expand && <Activities activities={itinerary.activities} />}
+          {expand && <Card className="viewsImg" Activities={itinerary.activities} comments={itinerary.comments} />}
         </div>
       </div>
     );

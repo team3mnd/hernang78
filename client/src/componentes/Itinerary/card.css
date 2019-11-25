@@ -1,0 +1,28 @@
+#wrap{
+	width: 100%;
+	overflow: hidden;
+}
+#capaimg{
+	z-index: 1000;
+	width: 100%;
+	overflow-x: scroll;
+}
+
+#capaimg::-webkit-scrollbar{
+	height: 7px;
+}
+
+#capaimg::-webkit-scrollbar-thumb{
+	background-color: #000000;
+}
+
+#capaimg::-webkit-scrollbar-track{
+	background-color: transparent;
+	-webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.493);
+}
+.img{
+    width: 130px;
+    height: 135px;
+	cursor: pointer;
+}
+
