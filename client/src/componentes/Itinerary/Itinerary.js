@@ -24,7 +24,6 @@ export default class Iti extends Component {
       <div className="containerItinerary">
         <div className="wrapperItinerary">
           <div className="profilePicture">
-            {/* {itinerary.picturePath} */}
             <img src={itinerary.pictureId} alt="imageProfile" id="imageProfile" />
             {itinerary.author}
           </div>
