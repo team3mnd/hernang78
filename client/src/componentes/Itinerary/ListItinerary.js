@@ -8,7 +8,8 @@ import './Itinerary.css'
 import { connect } from "react-redux";
 import { getItinerary } from '../../store/actions/itineraryActions.js';
 // Components
-import Itinerary from './Itinerary'
+import Itinerary from './Itinerary';
+import Loading from '../Loading';
 
 
 
@@ -37,7 +38,7 @@ class ListItinerary extends Component {
     return (
       <>
         {loading ?
-          "Loading.."
+          <Loading />
           :
           <>
           <div className="containerListItinerary">

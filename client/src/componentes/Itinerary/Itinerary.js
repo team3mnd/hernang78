@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import image1 from "../../images/profile/GaudiLover.png";
 import "./Itinerary.css";
 
 import Card from "./card.js";
@@ -47,7 +46,9 @@ export default class Iti extends Component {
               View All
           </button>
           </div>
-          {expand && <Card className="viewsImg" Activities={itinerary.activities} comments={itinerary.comments} />}
+          <div className="containerActivitiesExpand">
+            {expand && <Card className="viewsImg" Activities={itinerary.activities} comments={itinerary.comments} />}
+          </div>
         </div>
       </div>
     );

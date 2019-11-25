@@ -24,7 +24,8 @@
 }
 
 #imageProfile {
-  width: 80%;
+  width: 100%;
+  height: 80%;
   border-radius: 50%;
   margin: auto;
 }
@@ -52,4 +53,8 @@
 
 .containerActivities {
   width: 100%;
+}
+.containerActivitiesExpand{
+  width: 90%;
+  margin: 30px auto;
 }
