@@ -4,17 +4,13 @@ import Button from "react-bootstrap/Button";
 export default class Signup extends Component {
   render() {
     return (
-      <div>
-        <p>Create new account</p>
+      <div className='d-flex flex-column justify-content-center align-items-center'>
         <label htmlFor="name">Name: </label>
-        <input type="text" />
-        <br />
+        <input type="text"  className='w-50 mb-2' />
         <label htmlFor="user">User: </label>
-        <input type="text" />
-        <br />
+        <input type="text"  className='w-50 mb-2' />
         <label htmlFor="pass">New password: </label>
-        <input type="password" />
-        <br />
+        <input type="password"  className='w-50 mb-2' />
         <Button>Create New User</Button>
       </div>
     );

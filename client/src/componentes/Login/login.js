@@ -4,14 +4,11 @@ import Button from 'react-bootstrap/Button';
 export default class Login extends Component {
   render() {
     return (
-      <div>
-        <p>Log In</p>
+      <div className='d-flex flex-column justify-content-center align-items-center'>
         <label htmlFor="user">User: </label>
-        <input type="text"/>
-        <br/>
+        <input type="text" className='w-50 mb-2'/>
         <label htmlFor="pass">Password: </label>
-        <input type="password"/>
-        <br/>
+        <input type="password" className='w-50 mb-2'/>
         <Button>Log In</Button>
       </div>
     );
