@@ -19,10 +19,12 @@ class ListItinerary extends Component {
     this.props.setItinerary(this.props.match.url)
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({
-      listItinerary: nextProps.itineraryCity
-    })
+  componentDidUpdate(prevProps){
+    if (this.props.itineraryCity !== prevProps.itineraryCity){
+      this.setState({
+        listItinerary: this.props.itineraryCity
+      })
+    }
   }
 
   render() {
