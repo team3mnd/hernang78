@@ -21,10 +21,11 @@ export default class Card extends Component {
     );
   }
 
-  pictures() {
+  activities() {
     let { Activities } = this.props;
-    return Activities.map(i => i.picture);
+    return Activities.map(i => i);
   }
+
 
   sendComment(e) {
     console.log(e)
@@ -32,8 +33,8 @@ export default class Card extends Component {
   render() {
     return (
       <div className='d-flex justify-content-center flex-column'>
-        <SlidePack className="img" setimg={this.pictures()} />
-        <h5>Comments: </h5>
+        <SlidePack className="img" setObj={this.activities()} />
+        <h5 style={{marginTop: "15px"}}>Comments: </h5>
         <span>{this.listComments()}</span>
         <input type="text" className="w-80 form-control" placeholder=" Your comment..." onChange={this.sendComment} />
         {/* <input type="submit" value="Submit"> */}

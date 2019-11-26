@@ -9,15 +9,16 @@
 }
 
 #capaimg::-webkit-scrollbar{
-	height: 0px;
+	height: 2px;
 }
 
 #capaimg::-webkit-scrollbar-thumb{
 	background-color: #000000;
+	height: 1px;
 }
 
 .img{
-    width: 130px;
+	width: 130px;
     height: 135px;
 	cursor: pointer;
 }
