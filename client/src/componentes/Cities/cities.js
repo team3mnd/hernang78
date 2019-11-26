@@ -17,9 +17,10 @@ class Cities extends Component {
 
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps){
+    if(this.props.cities !== prevProps.cities)
     this.setState({
-      filteredCities: nextProps.cities
+      filteredCities: this.props.cities
     })
   }
 
