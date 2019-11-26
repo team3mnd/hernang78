@@ -1,6 +1,5 @@
 import {GET_CITIES, IS_FETCHING} from '../constants'
 
-
 const initialState = {
   cities: [],
   isFetching: false

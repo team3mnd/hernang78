@@ -14,10 +14,9 @@ class Cities extends Component {
 
   componentDidMount() {
     this.props.getCities()
-
   }
 
-  componentDidUpdate(prevProps){
+  componentDidUpdate(prevProps){    
     if(this.props.cities !== prevProps.cities)
     this.setState({
       filteredCities: this.props.cities
