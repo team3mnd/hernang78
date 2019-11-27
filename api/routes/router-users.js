@@ -2,8 +2,13 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const { check, validationResult } = require('express-validator');
+const key = require("../../nodemon.json");
+const jwt = require("jsonwebtoken");
+
 
 router.get('/', (req, res) => {
+  console.log(key.secretKey);
+
   User.find()
     .then(doc => {
       res.status(200).json(doc)
@@ -33,17 +38,60 @@ router.post('/add',
         img: req.body.picture,
         mail: req.body.mail
       })
-
       user
         .save(function (err) {
           if (err) {
-            res.json({status:'Error', data:err.message});
+            res.send(err.message);
           }
           else {
-            res.json({status:'OK', data:'User added successfully'})
+            res.send('User added successfully')
           }
         });
     }
   });
+
+router.post('/login',
+  async function (req, res, next) {
+    const email = req.body.email
+    const password = req.body.password
+    const userWithEmail = await findUserByEmail(email)
+
+    if (userWithEmail.password === password) {
+      const payload = {
+        id: userWithEmail._id,
+        username: userWithEmail.userName
+      };
+      const options = { expiresIn: 2592000 };
+      jwt.sign(
+        payload,
+        key.secretKey,
+        options,
+        (err, token) => {
+          if (err) {
+            res.json({
+              success: false,
+              token: "There was an error"
+            });
+          } else {
+            res.json({
+              success: true,
+              token: token
+            });
+          }
+        }
+      );
+    }
+    else {
+      res.send('Wrong password')
+    }
+  });
+
+async function findUserByEmail(email) {
+  try {
+    return User.findOne({ 'mail': email.toLowerCase() })
+  } catch (error) {
+    throw new Error(`Unable to connect to the database.`)
+  }
+}
 
 module.exports = router;
