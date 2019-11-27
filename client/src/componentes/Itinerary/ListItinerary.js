@@ -9,6 +9,7 @@ import { getAllItineraries } from '../../store/actions/itineraryActions.js';
 // Components
 import Itinerary from './Itinerary';
 import Loading from '../Loading';
+import NavBar from '../Nav/nav'
 
 class ListItinerary extends Component {
   state = {
@@ -31,6 +32,7 @@ class ListItinerary extends Component {
     const { listItinerary } = this.state
     return (
       <>
+        <NavBar />
         {this.props.loading ?
           <Loading />
           :
