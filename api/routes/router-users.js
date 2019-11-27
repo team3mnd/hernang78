@@ -37,10 +37,10 @@ router.post('/add',
       user
         .save(function (err) {
           if (err) {
-            res.send(err.message);
+            res.json({status:'Error', data:err.message});
           }
           else {
-            res.send('User added successfully')
+            res.json({status:'OK', data:'User added successfully'})
           }
         });
     }
