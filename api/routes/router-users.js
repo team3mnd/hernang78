@@ -4,10 +4,10 @@ const User = require('../models/user');
 const { check, validationResult } = require('express-validator');
 const key = require("../../nodemon.json");
 const jwt = require("jsonwebtoken");
+const passport = require('../../passport');
 
-
-router.get('/', (req, res) => {
-  console.log(key.secretKey);
+router.get('/', passport.authenticate("jwt", { session: false }),
+(req, res) => {
 
   User.find()
     .then(doc => {
@@ -51,7 +51,7 @@ router.post('/add',
   });
 
   router.post('/login',
-  async function (req, res, next) {
+  async function (req, res) {
     const email = req.body.email
     const password = req.body.password
     const userWithEmail = await findUserByEmail(email)
