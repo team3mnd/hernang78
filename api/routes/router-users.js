@@ -23,7 +23,7 @@ router.post('/add',
     check('mail').isEmail(),
     check('password').isLength({ min: 5 })
   ],
-  (req, res, next) => {
+  (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
@@ -50,42 +50,49 @@ router.post('/add',
     }
   });
 
-router.post('/login',
+  router.post('/login',
   async function (req, res, next) {
     const email = req.body.email
     const password = req.body.password
     const userWithEmail = await findUserByEmail(email)
-
-    if (userWithEmail.password === password) {
-      const payload = {
-        id: userWithEmail._id,
-        username: userWithEmail.userName
-      };
-      const options = { expiresIn: 2592000 };
-      jwt.sign(
-        payload,
-        key.secretKey,
-        options,
-        (err, token) => {
-          if (err) {
-            res.json({
-              success: false,
-              token: "There was an error"
-            });
-          } else {
-            res.json({
-              success: true,
-              token: token
-            });
+ 
+    if (userWithEmail) {
+      if (userWithEmail.password === password) {
+        const payload = {
+          id: userWithEmail._id,
+          username: userWithEmail.userName
+        };
+        const options = { expiresIn: 2592000 };
+        jwt.sign(
+          payload,
+          key.secretKey,
+          options,
+          (err, token) => {
+            if (err) {
+              res.json({
+                success: false,
+                token: "There was an error"
+              });
+            } else {
+              res.json({
+                success: true,
+                token: token
+              });
+            }
           }
-        }
-      );
+        );
+      }
+      else {
+        res.send('Wrong password')
+      }
     }
     else {
-      res.send('Wrong password')
+      res.send('email not registered')
     }
   });
 
+
+ 
 async function findUserByEmail(email) {
   try {
     return User.findOne({ 'mail': email.toLowerCase() })
