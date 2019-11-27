@@ -12,7 +12,15 @@ router.get('/', (req, res) => {
     })
 });
 
-router.post('/add', (req, res, next) => {
+async function findUserByUsername (username) {
+  try {
+      return User.findOne({'userName': username})
+  } catch (error) {
+      throw new Error(`Unable to connect to the database.`)
+  }
+}
+
+router.post('/add', (req, res) => {
   const user = new User({
     userName: req.body.userName,
     country: req.body.country,
@@ -22,20 +30,15 @@ router.post('/add', (req, res, next) => {
     img: req.body.picture,
     mail: req.body.mail
   });
-  console.log(user);
-
-  user
-    .save(function (err) {
-      if (err) {
-        res.send(err.message);
-        console.log(err);
-
-      }
-      else {
-        res.send('User added successfully')
-      }
-
-    });
+  const userWithUsername = findUserByUsername(user.userName)
+    if (userWithUsername) {
+        return res.send({message: 'Username is already taken.'})
+    }
+    else{
+      user.save(res.send('User added successfully'))
+    }
 })
+
+
 
 module.exports = router;

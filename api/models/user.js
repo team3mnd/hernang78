@@ -4,17 +4,7 @@ const userSchema = new Schema({
     firstName: String,
     lastName: String,
     password: { type: String, required: true },
-    userName: {
-        type: String,
-        validate: {
-            validator: function (v, cb) {
-                User.find({ name: v }, function (err, docs) {
-                    cb(docs.length == 0);
-                });
-            },
-            message: 'User already exists!'
-        }
-    },
+    userName: {type: String, required: true},
     mail: { type: String, required: true },
     country: String,
     picture: String
