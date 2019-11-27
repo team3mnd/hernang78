@@ -17,7 +17,7 @@ class ListItinerary extends Component {
   }
 
   componentDidMount() {
-    this.props.setItinerary(this.props.match.url)
+    this.props.setItinerary(this.props.match.url)    
   }
 
   componentDidUpdate(prevProps){

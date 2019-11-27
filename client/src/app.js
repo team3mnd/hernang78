@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
-// Componentes
 import Cities from "./componentes/Cities/cities";
 import Home from "./componentes/Home/home";
 import Login from "./componentes/Login/login";
