@@ -19,12 +19,13 @@ router.get('/', passport.authenticate("jwt", { session: false }),
 });
 
 router.post('/add',
-  [
-    check('mail').isEmail(),
+  [    check('mail').isEmail(),
     check('password').isLength({ min: 5 })
   ],
   (req, res) => {
+    console.log(req.body)
     const errors = validationResult(req);
+    
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }

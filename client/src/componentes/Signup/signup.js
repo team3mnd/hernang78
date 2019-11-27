@@ -52,18 +52,27 @@ export default class Signup extends Component {
   }
 
   obtenerDatos(e) {
-    e.preventDefault();
-    const user = {
-      user: this.state.user,
-      password: this.state.password,
-      email: this.state.email,
+    let user = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
+      password: this.state.password,
+      userName: this.state.user,
+      mail: this.state.email,
       country: this.state.country,
-      checkTC: this.state.checkTC,
-      imageProfile: this.state.imageProfile
+      picture: this.state.imageProfile
     };
-    console.log(user);
+    console.log(user)
+    fetch('/users/add', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => console.log(res))
+      .catch(error => console.log(error))
+    e.preventDefault();
   }
 
   render() {
