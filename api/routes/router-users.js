@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator');
 const key = require("../../nodemon.json");
 const jwt = require("jsonwebtoken");
 
+
 router.get('/', (req, res) => {
   console.log(key.secretKey);
 
@@ -37,7 +38,6 @@ router.post('/add',
         img: req.body.picture,
         mail: req.body.mail
       })
-
       user
         .save(function (err) {
           if (err) {
