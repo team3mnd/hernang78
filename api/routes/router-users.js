@@ -22,19 +22,17 @@ router.post('/add', (req, res, next) => {
     img: req.body.picture,
     mail: req.body.mail
   });
-  console.log(user);
+  /* console.log(user); */
 
   user
     .save(function (err) {
       if (err) {
         res.send(err.message);
-        console.log(err);
-
+        /* console.log(err); */
       }
       else {
         res.send('User added successfully')
       }
-
     });
 })
 
