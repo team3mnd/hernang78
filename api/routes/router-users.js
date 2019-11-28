@@ -84,11 +84,11 @@ router.post('/add',
         );
       }
       else {
-        res.send('Wrong password')
+        res.json('Wrong password')
       }
     }
     else {
-      res.send('email not registered')
+      res.json('email not registered')
     }
   });
 

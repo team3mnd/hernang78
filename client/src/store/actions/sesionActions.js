@@ -6,7 +6,7 @@ const resultFetch = (data) => {
         // siempre el que importe
         type: SESION_ON,
         payload: {
-          sesion: data.success,
+          success: data.success,
           token: data.token
         }
     }

@@ -2,7 +2,7 @@ import { SESION_ON, SESION_OFF } from '../constants'
 
 // inicia el state con los datos que le definimos
 const initialState = {
-  sesion: false,
+  success: false,
   token: ''
 };
 

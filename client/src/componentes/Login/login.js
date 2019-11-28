@@ -19,27 +19,39 @@ class Login extends Component {
     this.setState({ user: e });
   }
 
+  componentDidUpdate(prevProps) {
+    /* if (this.props.success === true){
+    this.setState({
+      redirect: true
+    });
+    }else{
+      alert('err')
+    } */
+    console.log(this.props.success)
+    if (this.props.success !== prevProps.success){
+      this.setState({
+        redirect: prevProps.success
+      });
+    }
+    
+  }
+
   valuePassword(e) {
     this.setState({ password: e });
   }
 
   obtieneLogin(e) {
+//    e.preventDefault()
     let user = {
       email: this.state.user,
       password: this.state.password
     };
     console.log('obtieneLogin');
     this.props.login(user);
-    if (this.props.success === true){
-    this.setState({
-      redirect: true
-    });
-    }else{
-      alert('err')
-    }
   }
   renderRedirect = () => {
-    if (this.state.redirect) {
+    if (this.state.redirect == true) {
+      console.log(this.state.redirect)
       return <Redirect to='/' />
     }
   }
@@ -86,10 +98,9 @@ class Login extends Component {
                 <Form.Text className="text-muted">Remember me.</Form.Text>
               </Form.Row>
             </Form.Group>
-
+{this.renderRedirect()}
             <Form.Group>
               <div className="row justify-content-center justify-content-md-start">
-                {this.renderRedirect()}
                 <Button 
                 className="btn" 
                 variant="primary" 
