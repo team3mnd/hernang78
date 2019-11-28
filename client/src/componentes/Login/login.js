@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import NavBar from "../Nav/nav";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./login.css";
+import { getAccess } from '../../store/actions/sesionActions.js';
+import { connect } from "react-redux";
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     user: "",
     password: "",
-    checkRemember: false
+    checkRemember: false,
+    redirect: false
   };
 
   valueUser(e) {
@@ -20,6 +23,26 @@ export default class Login extends Component {
     this.setState({ password: e });
   }
 
+  obtieneLogin(e) {
+    let user = {
+      email: this.state.user,
+      password: this.state.password
+    };
+    console.log('obtieneLogin');
+    this.props.login(user);
+    if (this.props.success === true){
+    this.setState({
+      redirect: true
+    });
+    }else{
+      alert('err')
+    }
+  }
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    }
+  }
   render() {
     return (
       <>
@@ -28,11 +51,11 @@ export default class Login extends Component {
           <h3 className="row justify-content-center">Login</h3>
           <Form className="px-5 container-fluid h-100">
             <Form.Group controlId="user">
-              <Form.Label>Username:</Form.Label>
+              <Form.Label>Username o email:</Form.Label>
               <Form.Control
                 type="text"
                 ref={this.textInput}
-                placeholder="Enter username"
+                placeholder="Enter username o email"
                 value={this.state.user}
                 onChange={e => this.valueUser(e.target.value)}
                 required
@@ -66,7 +89,12 @@ export default class Login extends Component {
 
             <Form.Group>
               <div className="row justify-content-center justify-content-md-start">
-                <Button className="btn" variant="primary" type="ok">
+                {this.renderRedirect()}
+                <Button 
+                className="btn" 
+                variant="primary" 
+                type="ok"
+                onClick={e => this.obtieneLogin(e)}>
                   OK
                 </Button>
               </div>
@@ -112,3 +140,18 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    success: state.sesionReducer.success,
+    token: state.sesionReducer.token
+  }
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  login: (user) => {
+    dispatch(getAccess(user))
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

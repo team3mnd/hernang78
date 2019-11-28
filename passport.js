@@ -5,11 +5,11 @@ const key = require("./nodemon.json");
 const passport = require('passport');
 
 const options ={}
-options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-options.secretOrKey = key.secretKey
-console.log(key.secretKey);
+//options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+options.jwtFromRequest = ExtractJwt.fromHeader("authorization");
+options.secretOrKey = key.secretKey;
 
-module.exports = passport.use(
+passport.use(
     new JwtStrategy(options, (jwt_payload, done) => {
         User.findById(jwt_payload.id)
         .then(user => {
@@ -21,3 +21,5 @@ module.exports = passport.use(
         .catch(err => console.log(err));
     })
   );
+
+  module.exports = passport;
