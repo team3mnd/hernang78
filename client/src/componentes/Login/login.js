@@ -6,8 +6,8 @@ import { Link, Redirect } from "react-router-dom";
 import "./login.css";
 import { getAccess } from '../../store/actions/sesionActions.js';
 import { connect } from "react-redux";
+import ModalError from "../ModalError/ModalError";
 import GoogleLogin from'react-google-login';
-
 
 
 class Login extends Component {
@@ -15,7 +15,9 @@ class Login extends Component {
     user: "",
     password: "",
     checkRemember: false,
-    redirect: false
+    redirect: false,
+    mostrarErrores: false,
+    errors: ""
   };
 
   valueUser(e) {
@@ -23,34 +25,54 @@ class Login extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.success)
-    if (this.props.success !== prevProps.success){
+    /* console.log(this.props.success) */
+    if (this.props.success !== prevProps.success) {
       this.setState({
         redirect: this.props.success
       });
     }
- }
+    if (this.props.errors !== prevProps.errors) {
+      this.setState({
+        mostrarErrores: true,
+        errors: this.props.errors
+      });
+    }
+  }
 
   valuePassword(e) {
     this.setState({ password: e });
   }
 
   obtieneLogin(e) {
-//    e.preventDefault()
+    /* this.setState({ errors: ""}) */
+    /* e.preventDefault() */
     let user = {
       email: this.state.user,
       password: this.state.password,
       useGoogle: false
     };
-    console.log('obtieneLogin');
-    this.props.login(user);
+    // console.log('obtieneLogin');
+    this.props.login(user)
+    if (this.props.errors) {
+      this.setState({
+        mostrarErrores: true
+      })
+    }
   }
+
   renderRedirect = () => {
     if (this.state.redirect === true) {
       console.log(this.state.redirect)
       return <Redirect to='/' />
     }
   }
+
+  mostrarErrores() {
+    this.setState({
+      mostrarErrores: false
+    })
+  }
+
   render() {
     const responseGoogle = (response) => {
       let user = {
@@ -63,6 +85,12 @@ class Login extends Component {
     return (
       <>
         <NavBar />
+
+        {this.state.mostrarErrores ?
+          <ModalError errors={this.props.errors} mostrar={() => this.mostrarErrores()} />
+          : <div> </div>
+        }
+
         <div className="containerItinerary" style={{ paddingTop: "20px", paddingBottom: "20px" }}>
           <h3 className="row justify-content-center">Login</h3>
           <Form className="px-5 container-fluid h-100">
@@ -102,14 +130,14 @@ class Login extends Component {
                 <Form.Text className="text-muted">Remember me.</Form.Text>
               </Form.Row>
             </Form.Group>
-{this.renderRedirect()}
+            {this.renderRedirect()}
             <Form.Group>
               <div className="row justify-content-center justify-content-md-start">
-                <Button 
-                className="btn" 
-                variant="primary" 
-                type="button"
-                onClick={e => this.obtieneLogin(e)}>
+                <Button
+                  className="btn"
+                  variant="primary"
+                  type="button"
+                  onClick={e => this.obtieneLogin(e)}>
                   OK
                 </Button>
               </div>
@@ -157,7 +185,8 @@ class Login extends Component {
 const mapStateToProps = (state) => {
   return {
     success: state.sesionReducer.success,
-    token: state.sesionReducer.token
+    token: state.sesionReducer.token,
+    errors: state.sesionReducer.errors
   }
 };
 

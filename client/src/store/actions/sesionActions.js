@@ -2,29 +2,30 @@ import { SESION_OFF, SESION_ON } from '../constants'
 //import store from '../store'
 
 const resultFetch = (data) => {
-    return {
-        // siempre el que importe
-        type: SESION_ON,
-        payload: {
-          success: data.success,
-          token: data.token
-        }
+  return {
+    // siempre el que importe
+    type: SESION_ON,
+    payload: {
+      success: data.success,
+      token: data.token,
+      errors: data.errors
     }
+  }
 }
 
 const sendFetch = async (user) => {
-    let res = await fetch('/users/login', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-
-    let data = await res.json();
-    console.log(data)
-    return data;
+  let res = await fetch('/users/login', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  })
+   
+  let data = await res.json();
+  console.log("data", data)
+  return data;
 }
 
 /* export function isFetching(value) {
@@ -32,19 +33,19 @@ const sendFetch = async (user) => {
 } */
 
 export const getAccess = (user) => {
-    //store.dispatch(isFetching(true));
-    console.log('getAccess')
-    return async function (dispatch) {
-        try {
-            const data = await sendFetch(user);
-            
-            //dispatch(isFetching(false));
-            let dataFetched = resultFetch(data);
-            
-            return dispatch(dataFetched);
-        } catch (err) {
-            //dispatch(isFetching(false));
-            console.error(err)
-        }
+  //store.dispatch(isFetching(true));
+  console.log('getAccess')
+  return async function (dispatch) {
+    try {
+      const data = await sendFetch(user);
+
+      //dispatch(isFetching(false));
+      let dataFetched = resultFetch(data);
+
+      return dispatch(dataFetched);
+    } catch (err) {
+      //dispatch(isFetching(false));
+      console.error("err", err)
     }
+  }
 }
