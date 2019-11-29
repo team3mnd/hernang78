@@ -6,7 +6,9 @@ const userSchema = new Schema({
   lastName: String,
   password: {
     type: String,
-    required: true
+    required: function() {
+      return !this.useGoogle;
+    }
   },
   userName: {
     type: String,
@@ -18,7 +20,10 @@ const userSchema = new Schema({
     required: true
   },
   country: String,
-  picture: String
+  picture: String,
+  useGoogle: {
+    type : Boolean
+  }
 });
 userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('users', userSchema, 'users');
