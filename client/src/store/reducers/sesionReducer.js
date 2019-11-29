@@ -12,13 +12,13 @@ export default (state = initialState, action) => {
     case SESION_ON:
       return {
         ...state,
-        sesion: action.payload.sesion,
+        success: action.payload.success,
         token: action.payload.token
       }
     case SESION_OFF:
       return {
         ...state,
-        sesion: action.sesion,
+        success: action.success,
         token: ''
       }
     default:
