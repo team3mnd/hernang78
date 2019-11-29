@@ -173,8 +173,9 @@ router.post('/add',
 
   router.post('/login',
   async function (req, res) {
-    const email = req.body.email
-    const password = req.body.password
+    const email = req.body.email;
+    const password = req.body.password;
+    const useGoogle = req.body.useGoogle;
     const userWithEmail = await findUserByEmail(email)
 
     if (userWithEmail) {

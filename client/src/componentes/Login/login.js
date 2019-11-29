@@ -7,6 +7,8 @@ import "./login.css";
 import { getAccess } from '../../store/actions/sesionActions.js';
 import { connect } from "react-redux";
 import ModalError from "../ModalError/ModalError";
+import GoogleLogin from'react-google-login';
+
 
 class Login extends Component {
   state = {
@@ -46,7 +48,8 @@ class Login extends Component {
     /* e.preventDefault() */
     let user = {
       email: this.state.user,
-      password: this.state.password
+      password: this.state.password,
+      useGoogle: false
     };
     // console.log('obtieneLogin');
     this.props.login(user)
@@ -71,6 +74,14 @@ class Login extends Component {
   }
 
   render() {
+    const responseGoogle = (response) => {
+      let user = {
+        email: response.profileObj.email,
+        password: 'password',
+        useGoogle: true
+      };
+      this.props.login(user)
+    }
     return (
       <>
         <NavBar />
@@ -135,13 +146,11 @@ class Login extends Component {
             <div>
               <Form.Group>
                 <div className="row justify-content-center justify-content-md-start">
-                  <Button
-                    className="btn socialButton"
-                    variant="primary"
-                    type="LogGoogle"
-                  >
-                    Log in with Google
-                  </Button>
+                  <GoogleLogin
+                    clientId="748277599795-5567kmucrd0ti6fc7ip3o0lp0vt7tqdr.apps.googleusercontent.com"
+                    buttonText="LOGIN WITH GOOGLE"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}/>
                 </div>
               </Form.Group>
 
