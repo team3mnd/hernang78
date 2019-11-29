@@ -84,7 +84,10 @@ router.post('/add',
         );
       }
       else {
-        res.json('Wrong password')
+        res.json({
+          success: false,
+          token: "There was an error"
+        });
       }
     }
     else {

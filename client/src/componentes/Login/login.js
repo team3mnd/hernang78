@@ -20,21 +20,13 @@ class Login extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    /* if (this.props.success === true){
-    this.setState({
-      redirect: true
-    });
-    }else{
-      alert('err')
-    } */
     console.log(this.props.success)
     if (this.props.success !== prevProps.success){
       this.setState({
-        redirect: prevProps.success
+        redirect: this.props.success
       });
     }
-    
-  }
+ }
 
   valuePassword(e) {
     this.setState({ password: e });
@@ -50,7 +42,7 @@ class Login extends Component {
     this.props.login(user);
   }
   renderRedirect = () => {
-    if (this.state.redirect == true) {
+    if (this.state.redirect === true) {
       console.log(this.state.redirect)
       return <Redirect to='/' />
     }
@@ -104,7 +96,7 @@ class Login extends Component {
                 <Button 
                 className="btn" 
                 variant="primary" 
-                type="ok"
+                type="button"
                 onClick={e => this.obtieneLogin(e)}>
                   OK
                 </Button>
