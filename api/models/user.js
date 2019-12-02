@@ -39,13 +39,13 @@ userSchema.pre('save', function(next){
 });
 
 //method compare
-userSchema.methods.comparePassword = function(password, next){
-  bcrypt.compare(password, this.password, (error, sonIgualesBool) =>{
+userSchema.methods.comparePassword = function(password){
+  bcrypt.compare(password, this.password, (error) =>{
     if(error){
-      return next(error);
+      return false;
     }
     else{
-      next(null, sonIgualesBool);
+      return true;
     }
   })
 }
