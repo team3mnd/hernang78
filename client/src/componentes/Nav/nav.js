@@ -15,23 +15,39 @@ import { connect } from "react-redux";
 // y si quiero cambios en la store los actions
 // exammple import { getAllCities } from "../../store/actions/citiesActions";
 
+const jwt = require("jsonwebtoken");
 
 class NavbarMain extends React.Component {
+  state = {
+    userName: '',
+    token: ''
+  };
+
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    const tokenDecoded = jwt.decode(token);
+    this.setState({ token });
+    if (localStorage.getItem('success') === 'true') {
+      const userName = tokenDecoded.username;
+      this.setState({ userName });
+    }
+  }
+
   render() {
 
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Nav className="mr-auto">
 
-        {
-            this.props.successStore
+          {
+            localStorage.getItem('success') === 'true'
               ?
               <NavDropdown
-                title="User"
+                title={this.state.userName}
                 id="collasible-nav-dropdown"
                 className="NavMainDrop"
               >
-                <NavDropdown.Item className="dropdown-item" as={Link} to="./logout">
+                <NavDropdown.Item className="dropdown-item" as={Link} to="/logout">
                   <FontAwesomeIcon icon={faUserCircle} />
                   <span style={{ marginLeft: "5px" }}>Logout</span>
                 </NavDropdown.Item>
