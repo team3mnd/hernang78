@@ -1,14 +1,23 @@
-import { SESION_OFF, SESION_ON } from '../constants'
+import { SESSION_OFF, SESSION_ON, NO_ERRORS } from '../constants'
 //import store from '../store'
 
 const resultFetch = (data) => {
   return {
     // siempre el que importe
-    type: SESION_ON,
+    type: SESSION_ON,
     payload: {
       success: data.success,
       token: data.token,
       errors: data.errors
+    }
+  }
+}
+
+const noErrors = () => {
+  return {
+    type: NO_ERRORS,
+    payload: {
+      errors: ""
     }
   }
 }
@@ -22,7 +31,7 @@ const sendFetch = async (user) => {
     },
     body: JSON.stringify(user)
   })
-   
+
   let data = await res.json();
   console.log("data", data)
   return data;
@@ -43,6 +52,31 @@ export const getAccess = (user) => {
       let dataFetched = resultFetch(data);
 
       return dispatch(dataFetched);
+    } catch (err) {
+      //dispatch(isFetching(false));
+      console.error("err", err)
+    }
+  }
+}
+
+export const getExit = () => {
+  return ({
+    type: SESSION_OFF,
+    payload: {
+      success: false,
+      token: ''
+    }
+  });
+}
+
+export const clearErrors = () => {
+  console.log('no errors')
+  return function (dispatch) {
+    try {
+      //dispatch(isFetching(false));
+      // let dataFetched = resultFetch(data);
+
+      return dispatch(noErrors());
     } catch (err) {
       //dispatch(isFetching(false));
       console.error("err", err)

@@ -54,10 +54,6 @@ export default class Signup extends Component {
     }
   }
 
-  showError() {
-
-  }
-
   obtenerDatos(e) {
     e.preventDefault();
     let user = {
@@ -86,12 +82,8 @@ export default class Signup extends Component {
       })
         .then(res => res.json())
         .then(res => {
-          /* console.log("res.expressErrors",res.expressErrors); */
-          /* console.log("res.databaseErrors",res.databaseErrors); */
-
           if (res.expressErrors || res.databaseErrors) {
             if (res.expressErrors) {
-              /* console.log(res.expressErrors.errors); */
               if (res.expressErrors.errors.length === 2) {
 
                 this.setState({
@@ -114,7 +106,6 @@ export default class Signup extends Component {
             }
 
             if (res.databaseErrors) {
-              /* console.log("res errors", res.databaseErrors); */
               if (res.databaseErrors.errors.mail && res.databaseErrors.errors.userName) {
                 this.setState({
                   errors: "Email & username already registered",
@@ -144,13 +135,11 @@ export default class Signup extends Component {
     }
   }
 
-
   mostrarErrores() {
     this.setState({
       mostrarErrores: false
     })
   }
-
 
   render() {
     return (
