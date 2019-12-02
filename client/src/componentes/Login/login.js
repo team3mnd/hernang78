@@ -99,7 +99,7 @@ class Login extends Component {
               <Form.Control
                 type="text"
                 ref={this.textInput}
-                placeholder="Enter username o email"
+                placeholder="Enter email"
                 value={this.state.user}
                 onChange={e => this.valueUser(e.target.value)}
                 required

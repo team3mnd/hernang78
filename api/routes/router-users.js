@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator');
 const key = require("../../nodemon.json");
 const jwt = require("jsonwebtoken");
 const passport = require('../../passport');
+const bcrypt = require('bcryptjs');
 
 router.get('/', passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -49,14 +50,14 @@ router.post('/add',
     }
   });
 
-router.post('/login',
+  router.post('/login',
   async function (req, res) {
     const email = req.body.email
     const password = req.body.password
     const userWithEmail = await findUserByEmail(email)
-
+ 
     if (userWithEmail) {
-      if (userWithEmail.password === password) {
+      if (bcrypt.compareSync(password, userWithEmail.password)) {
         const payload = {
           id: userWithEmail._id,
           username: userWithEmail.userName
@@ -99,7 +100,6 @@ router.post('/login',
       });
     }
   });
-
 
 
 async function findUserByEmail(email) {

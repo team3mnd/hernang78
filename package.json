@@ -12,6 +12,7 @@
   "author": "Ignacio Henin Coldorf",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -21,6 +22,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "react-google-login": "^5.0.7",
     "redux-actions": "^2.6.5"
   },
   "devDependencies": {

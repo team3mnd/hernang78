@@ -22,13 +22,12 @@ class Logout extends Component {
       <>
         <NavBar />
         <div className="containerItinerary" style={{ paddingTop: "20px", paddingBottom: "20px" }}>
-          <h3 className="row justify-content-center">Logout</h3>
-          <p> gracias por navegar por myTinerary</p>
+          <p className='text-center text-success'>you have successfully logged out</p>
         </div>
 
         <div className="btn w-50 m-auto d-block">
           <Link to="/">
-            <Button alt="button2" > Volver a Home </Button>
+            <Button alt="button2" > Back Home </Button>
           </Link>
         </div>
 

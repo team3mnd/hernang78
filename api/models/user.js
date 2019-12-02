@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 var uniqueValidator = require('mongoose-unique-validator');
 const Schema = mongoose.Schema;
+
 const userSchema = new Schema({
   firstName: String,
   lastName: String,
@@ -28,9 +29,10 @@ const userSchema = new Schema({
   }
 });
 
-userSchema.pre('save', function (next) {
-  bcrypt.genSalt(5).then(salts => {
-    bcrypt.hash(this.password, salts).then(hash => {
+//encriptar password antes de guardar
+userSchema.pre('save', function(next){
+  bcrypt.genSalt(10).then(salts =>{
+    bcrypt.hash(this.password, salts).then(hash =>{
       this.password = hash;
       next();
     }).catch(error => next(error));
