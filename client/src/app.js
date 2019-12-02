@@ -12,6 +12,7 @@ import Home from "./componentes/Home/home";
 import Login from "./componentes/Login/login";
 import Signup from "./componentes/Signup/signup";
 import ListItinerary from "./componentes/Itinerary/ListItinerary";
+import logout from "./componentes/Logout/logout";
 
 
 export default class App extends Component {
@@ -24,6 +25,7 @@ export default class App extends Component {
           <Route path="/cities" component={Cities} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route path="/logout" component={logout} />
         </Switch>
       </Router>
     );
