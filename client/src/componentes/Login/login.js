@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import NavBar from "../Nav/nav";
 import { Link, Redirect } from "react-router-dom";
 import "./login.css";
-import { getAccess } from '../../store/actions/sesionActions.js';
+import { getAccess, clearErrors } from '../../store/actions/sesionActions.js';
 import { connect } from "react-redux";
 import ModalError from "../ModalError/ModalError";
 import GoogleLogin from'react-google-login';
@@ -25,7 +25,6 @@ class Login extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    /* console.log(this.props.success) */
     if (this.props.success !== prevProps.success) {
       this.setState({
         redirect: this.props.success
@@ -68,6 +67,7 @@ class Login extends Component {
   }
 
   mostrarErrores() {
+    this.props.clearCurrentErrors();
     this.setState({
       mostrarErrores: false
     })
@@ -77,7 +77,7 @@ class Login extends Component {
     const responseGoogle = (response) => {
       let user = {
         email: response.profileObj.email,
-        password: 'password',
+        password: 'google_pass_y_ya_fue',
         useGoogle: true
       };
       this.props.login(user)
@@ -86,7 +86,7 @@ class Login extends Component {
       <>
         <NavBar />
 
-        {this.state.mostrarErrores ?
+        {(this.state.mostrarErrores && this.state.errors) ?
           <ModalError errors={this.props.errors} mostrar={() => this.mostrarErrores()} />
           : <div> </div>
         }
@@ -99,7 +99,7 @@ class Login extends Component {
               <Form.Control
                 type="text"
                 ref={this.textInput}
-                placeholder="Enter username o email"
+                placeholder="Enter email"
                 value={this.state.user}
                 onChange={e => this.valueUser(e.target.value)}
                 required
@@ -193,6 +193,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   login: (user) => {
     dispatch(getAccess(user))
+  },
+  clearCurrentErrors: () => {
+    dispatch(clearErrors())
   }
 });
 
