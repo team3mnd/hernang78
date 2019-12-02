@@ -77,7 +77,7 @@ class Login extends Component {
     const responseGoogle = (response) => {
       let user = {
         email: response.profileObj.email,
-        password: 'password',
+        password: 'google_pass_y_ya_fue',
         useGoogle: true
       };
       this.props.login(user)

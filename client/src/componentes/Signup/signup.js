@@ -154,19 +154,20 @@ export default class Signup extends Component {
 
   render() {
     const responseGoogle = (response) => {
+       console.log(response)
       let { profileObj } = response
       this.setState({
-        user: profileObj.givenName + profileObj.familyName,
+        user: profileObj.givenName + profileObj.familyName + profileObj.googleId,
         password: "google_pass_y_ya_fue",
         email: profileObj.email,
         firstName: profileObj.givenName,
         lastName: profileObj.familyName,
         img: profileObj.imageUrl,
         checkTC: true,
+        textAddImage: 1,
         imageProfile: profileObj.imageUrl
       })
       this.obtenerDatos(null)
-      console.log(response)
     }
 
     return (
