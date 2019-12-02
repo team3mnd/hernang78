@@ -165,7 +165,7 @@ router.post('/add',
             res.send(err.message);
           }
           else {
-            res.send('User added successfully')
+            res.json(user);
           }
         });
     }
