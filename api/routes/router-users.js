@@ -60,7 +60,8 @@ router.post('/add',
       if (bcrypt.compareSync(password, userWithEmail.password)) {
         const payload = {
           id: userWithEmail._id,
-          username: userWithEmail.userName
+          username: userWithEmail.userName,
+          picture: userWithEmail.picture
         };
         const options = { expiresIn: 2592000 };
         jwt.sign(

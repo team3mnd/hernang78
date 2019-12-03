@@ -9,6 +9,7 @@ import "./NavbarMain.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import Image from "react-bootstrap/Image";
 
 // redux
 import { connect } from "react-redux";
@@ -20,7 +21,8 @@ const jwt = require("jsonwebtoken");
 class NavbarMain extends React.Component {
   state = {
     userName: '',
-    token: ''
+    token: '',
+    imageUrl: ''
   };
 
   componentDidMount() {
@@ -29,7 +31,10 @@ class NavbarMain extends React.Component {
     this.setState({ token });
     if (localStorage.getItem('success') === 'true') {
       const userName = tokenDecoded.username;
-      this.setState({ userName });
+      console.log(tokenDecoded)
+      const imageUrl = tokenDecoded.picture
+      this.setState({ imageUrl });
+      this.setState({ userName })
     }
   }
 
@@ -43,10 +48,18 @@ class NavbarMain extends React.Component {
             localStorage.getItem('success') === 'true'
               ?
               <NavDropdown
-                title={this.state.userName}
                 id="collasible-nav-dropdown"
-                className="NavMainDrop"
+                title={this.state.userName}
               >
+                <NavDropdown.Item>
+                  <div className="containerImageProfile">
+                    <Image
+                      src={this.state.imageUrl}
+                      style={{ width: "50px", height: "50px", borderRadius: "50%", padding: '10%' }}
+                      alt="imageProfile"
+                    />
+                  </div>
+                </NavDropdown.Item>
                 <NavDropdown.Item className="dropdown-item" as={Link} to="/logout">
                   <FontAwesomeIcon icon={faUserCircle} />
                   <span style={{ marginLeft: "5px" }}>Logout</span>
