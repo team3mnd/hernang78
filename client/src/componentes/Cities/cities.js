@@ -85,7 +85,7 @@ class Cities extends Component {
                       return (
                         <Link
                           to={`/cities/${city.country}/${city.name}`}
-                          className="containerCities"
+                          className="containerCities col-md-10"
                           key={city._id}
                         >
                           <img
