@@ -1,13 +1,17 @@
 import React, { Component } from "react";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import "./Itinerary.css";
-
 import Card from "./card.js";
 
 export default class Iti extends Component {
   state = {
     itinerary: [],
     hashtags: [],
-    expand: false
+    expand: false,
+    likeButton: false
   };
 
   componentDidMount() {
@@ -32,6 +36,9 @@ export default class Iti extends Component {
               <span>Likes: {itinerary.rating}</span>
               <span>Duration: {itinerary.duration}</span>
               <span>Price: {itinerary.price}</span>
+                <FormControlLabel
+                  control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} value="checkedH" />}
+                />
             </div>
             <div className="w-100 d-flex flex-row flex-wrap">
               {hashtags.map((hash, i) => (
@@ -53,4 +60,4 @@ export default class Iti extends Component {
       </div>
     );
   }
-}
+} 
