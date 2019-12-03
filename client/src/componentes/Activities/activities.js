@@ -14,7 +14,7 @@ export default class activities extends Component {
     }
     render() {
         const {loading, activities} = this.state
-        console.log(this.props)
+        /* console.log(this.props) */
         return (
             <div>
                 {loading ? 

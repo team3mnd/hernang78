@@ -95,7 +95,7 @@ class Login extends Component {
           <h3 className="row justify-content-center">Login</h3>
           <Form className="px-5 container-fluid h-100">
             <Form.Group controlId="user">
-              <Form.Label>Username o email:</Form.Label>
+              <Form.Label>email:</Form.Label>
               <Form.Control
                 type="text"
                 ref={this.textInput}
@@ -151,18 +151,6 @@ class Login extends Component {
                     buttonText="LOGIN WITH GOOGLE"
                     onSuccess={responseGoogle}
                     onFailure={responseGoogle}/>
-                </div>
-              </Form.Group>
-
-              <Form.Group>
-                <div className="row justify-content-center justify-content-md-start">
-                  <Button
-                    className="btn socialButton"
-                    variant="primary"
-                    type="LogFacebook"
-                  >
-                    Log in with Facebook
-                  </Button>
                 </div>
               </Form.Group>
               <div>

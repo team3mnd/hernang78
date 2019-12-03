@@ -319,20 +319,20 @@ export default class Signup extends Component {
                 </Form.Text>
               </Form.Row>
             </Form.Group>
-            <div className="row justify-content-center justify-content-md-start">
-              <GoogleLogin
-                clientId="748277599795-5567kmucrd0ti6fc7ip3o0lp0vt7tqdr.apps.googleusercontent.com"
-                buttonText="CREATE WITH GOOGLE"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}/>
+            <div className="d-flex flex-column justify-content-center align-items-center">
               <Button
-                className="btn"
+                className="btn mb-2"
                 variant="primary"
                 type="submit"
                 onClick={e => this.obtenerDatos(e)}
               >
                 Submit
                 </Button>
+                <GoogleLogin
+                clientId="748277599795-5567kmucrd0ti6fc7ip3o0lp0vt7tqdr.apps.googleusercontent.com"
+                buttonText="CREATE WITH GOOGLE"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}/>
             </div>
           </Form>
         </div>
