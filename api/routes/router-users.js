@@ -6,6 +6,7 @@ const key = require("../../nodemon.json");
 const jwt = require("jsonwebtoken");
 const passport = require('../../passport');
 const bcrypt = require('bcryptjs');
+const Request = require('request')
 
 router.get('/', passport.authenticate("jwt", { session: false }),
   (req, res) => {
@@ -25,7 +26,9 @@ router.post('/add',
   ],
   (req, res) => {
     const errors = validationResult(req);
+    console.log(req.body.mail, req.body.password)
     if (!(errors.isEmpty())) {
+      console.log('entro a errores')
       return res.status(422).json({ expressErrors: errors });
     }
     else {
@@ -36,7 +39,8 @@ router.post('/add',
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         picture: req.body.picture,
-        mail: req.body.mail
+        mail: req.body.mail,
+        useGoogle: req.body.useGoogle
       })
       user
         .save(function (err) {
@@ -50,58 +54,88 @@ router.post('/add',
     }
   });
 
-  router.post('/login',
-  async function (req, res) {
-    const email = req.body.email
-    const password = req.body.password
-    const userWithEmail = await findUserByEmail(email)
- 
-    if (userWithEmail) {
-      if (bcrypt.compareSync(password, userWithEmail.password)) {
-        const payload = {
-          id: userWithEmail._id,
-          username: userWithEmail.userName,
-          picture: userWithEmail.picture
-        };
-        const options = { expiresIn: 2592000 };
-        jwt.sign(
-          payload,
-          key.secretKey,
-          options,
-          (err, token) => {
-            if (err) {
-              res.json({
-                success: false,
-                token: "There was an error",
-                errors: ''
-              });
-            } else {
-              res.json({
-                success: true,
-                token: token,
-                errors: ''
-              });
-            }
-          }
-        );
-      }
-      else {
-        res.status(404).json({
-          success: false,
-          token: '',
-          errors: 'Wrong email or password'
-        });
-      }
+router.post('/login', async function (req, res) {
+  const email = req.body.email
+  const password = req.body.password
+  const useGoogle = req.body.useGoogle
+  const responseGoogle = req.body.response
+  const userWithEmail = await findUserByEmail(email)
+
+  if (userWithEmail) {
+    if (bcrypt.compareSync(password, userWithEmail.password)) {
+      token(userWithEmail, (err, token) => {
+        if (err) {
+          return res.json({
+            success: false,
+            token: "There was an error",
+            errors: ''
+          });
+        } else {
+          return res.json({
+            success: true,
+            token: token,
+            errors: ''
+          });
+        }
+      });
     }
     else {
-      res.status(404).json({
+      return res.status(404).json({
         success: false,
         token: '',
         errors: 'Wrong email or password'
       });
     }
-  });
+  }
+  else {
+    if (useGoogle === true) {
+      let profileObj = responseGoogle.profileObj;
+      let user = {
+        userName: profileObj.givenName + profileObj.googleId,
+        password: "google_pass_y_ya_fue",
+        mail: profileObj.email,
+        firstName: profileObj.givenName,
+        lastName: profileObj.familyName,
+        useGoogle: true,
+        picture: profileObj.imageUrl,
+        country: null
+      }
+      Request.post({ url: 'http://localhost:5000/users/add', form: user }, (err, httpResponse, body) => {
+        if (httpResponse.statusCode !== 200) {
+          return res.status(404).json({
+            success: false,
+            token: '',
+            errors: 'Wrong email or password'
+          });
+        }
 
+        token(user, (err, token) => {
+          if (err) {
+            return res.json({
+              success: false,
+              token: "There was an error",
+              errors: ''
+            });
+          } else {
+            return res.json({
+              success: true,
+              token: token,
+              errors: ''
+            });
+          }
+        });
+      })
+    }
+    else {
+      return res.status(404).json({
+        success: false,
+        token: '',
+        errors: 'Wrong email or password'
+      });
+    }
+
+  }
+});
 
 async function findUserByEmail(email) {
   try {
@@ -109,6 +143,32 @@ async function findUserByEmail(email) {
   } catch (error) {
     throw new Error(`Unable to connect to the database.`)
   }
+}
+
+function token(userWithEmail, callback) {
+  let payload = {}
+  if (userWithEmail.useGoogle) {
+    payload = {
+      id: userWithEmail._id,
+      username: userWithEmail.firstName,
+      picture: userWithEmail.picture
+    }
+  }
+  else{
+    payload = {
+      id: userWithEmail._id,
+      username: userWithEmail.userName,
+      picture: userWithEmail.picture
+    }
+  }
+  const options = { expiresIn: 2592000 };
+  jwt.sign(
+    payload,
+    key.secretKey,
+    options,
+    callback
+  );
+
 }
 
 module.exports = router;
