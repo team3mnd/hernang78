@@ -18,7 +18,12 @@ const itinerarySchema = new Schema({
         cost : String,
         comments : String
     }],
-    comments: [],
+    comments: [{
+        photo: String,
+        comment: String,
+        user: String,
+        date: String
+    }],
     creationDate: Date
 });
 
