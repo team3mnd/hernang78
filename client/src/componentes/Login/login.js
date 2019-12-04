@@ -119,7 +119,7 @@ class Login extends Component {
             </Form.Group>
 
             <Form.Group controlId="policy">
-              <Form.Row className="pl-1">
+              {/* <Form.Row className="pl-1">
                 <Form.Check
                   type="checkbox"
                   label=""
@@ -129,7 +129,7 @@ class Login extends Component {
                   }
                 />
                 <Form.Text className="text-muted">Remember me.</Form.Text>
-              </Form.Row>
+              </Form.Row> */}
             </Form.Group>
             {this.renderRedirect()}
             <Form.Group>

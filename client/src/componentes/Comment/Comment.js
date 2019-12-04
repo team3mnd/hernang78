@@ -79,7 +79,7 @@ class Comment extends Component {
             </div>
             :
             <div>
-              <p className='text-center containerItinerary'>You have to be log to add a comment</p>
+              <p className='text-center containerItinerary'>You have to be logged in to comment</p>
             </div>
         }
       </div>
