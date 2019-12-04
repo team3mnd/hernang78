@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const itinerarySchema = new Schema({
-    idCity : String,
+    idCity: String,
     title: String,
     author: String,
     pictureId: String,
@@ -15,10 +15,17 @@ const itinerarySchema = new Schema({
         adress: String,
         picture: String,
         time: Number,
-        cost : String,
-        comments : String
+        cost: String,
+        comments: String
     }],
-    comments: [],
+    comments: [
+        {
+            photo: String,
+            comment: String,
+            user: String,
+            date: String
+        }
+    ],
     creationDate: Date
 });
 

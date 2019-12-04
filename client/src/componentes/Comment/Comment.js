@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import {sendComment} from '../../store/actions/commentActions'
 const jwt = require("jsonwebtoken");
 
-export default class Comment extends Component {
+class Comment extends Component {
   state = {
     userName: '',
     token: '',
@@ -79,7 +79,7 @@ export default class Comment extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     comment: state.commentReducer.comment,
     sending: state.commentReducer.isSending
