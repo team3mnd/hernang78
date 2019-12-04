@@ -57,24 +57,3 @@
   width: 90%;
   margin: 30px auto;
 }
-
-.MuiCheckbox-colorSecondary.Mui-checked{
-  color: red!important;
-}
-
-#root > div.containerListItinerary > div > div.wrapperItinerary > div.infoItinerary > div.inlineInfo > label {
-  margin-left: 0px;
-  margin-right: 0px; 
-}
-
-#root > div.containerListItinerary > div > div.wrapperItinerary > div.infoItinerary > div.inlineInfo > label > span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-13.MuiCheckbox-root.MuiCheckbox-colorSecondary.PrivateSwitchBase-checked-14.Mui-checked.MuiIconButton-colorSecondary,
-#root > div.containerListItinerary > div > div.wrapperItinerary > div.infoItinerary > div.inlineInfo > label > span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-13.MuiCheckbox-root.MuiCheckbox-colorSecondary.MuiIconButton-colorSecondary{
-  margin: 0px;
-  position: inherit!important;;
-}
-
-
-#root > div.containerListItinerary > div > div.wrapperItinerary > div.infoItinerary > div.inlineInfo > label > span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-13.MuiCheckbox-root.MuiCheckbox-colorSecondary.PrivateSwitchBase-checked-14.Mui-checked.MuiIconButton-colorSecondary > span.MuiIconButton-label,
-#root > div.containerListItinerary > div > div.wrapperItinerary > div.infoItinerary > div.inlineInfo > label > span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-13.MuiCheckbox-root.MuiCheckbox-colorSecondary.MuiIconButton-colorSecondary > span.MuiIconButton-label{
-  position: absolute!important;
-}

@@ -5,9 +5,22 @@ import Comment from '../Comment/Comment'
 
 export default class Card extends Component {
 
+  getComment(comment){
+
+    this.props.comments.push(comment)
+    this.setState({
+      updated : !this.state.updated
+    })
+
+  }
+
   constructor() {
     super();
     this.sendComment = this.sendComment.bind(this);
+    this.getComment = this.getComment.bind(this);
+    this.state = {
+      updated : false
+    }
   }
 
   listComments(comment) {
@@ -35,7 +48,7 @@ export default class Card extends Component {
         <h5 style={{ marginTop: "15px" }}>Comments: </h5>
         {<div><ul>{this.listComments(this.props)}</ul></div>}
         
-        <Comment _id={this.props._id}/>
+        <Comment _id={this.props._id} updateComment = {this.getComment}/>
       </div>
     )
   }
