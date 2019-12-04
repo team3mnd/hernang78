@@ -24,6 +24,11 @@ const userSchema = new Schema({
   },
   country: String,
   picture: String,
+  favourites: [
+    {
+      itineraryId: String
+    }
+  ],
   useGoogle: {
     type: Boolean
   }

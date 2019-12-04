@@ -36,8 +36,4 @@ export function getAllCities(){
       console.error(err)
     }
   }
-
 }
-
-
-
