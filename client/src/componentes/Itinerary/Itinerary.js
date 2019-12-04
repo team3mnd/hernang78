@@ -47,7 +47,7 @@ export default class Iti extends Component {
           </button>
           </div>
           <div className="containerActivitiesExpand">
-            {expand && <Card className="viewsImg" Activities={itinerary.activities} comments={itinerary.comments} />}
+            {expand && <Card className="viewsImg" Activities={itinerary.activities} comments={itinerary.comments} _id={itinerary._id}/>}
           </div>
         </div>
       </div>

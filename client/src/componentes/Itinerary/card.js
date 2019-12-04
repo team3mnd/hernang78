@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import SlidePack from './SlidePack/SlidePack';
 import './card.css';
+import Comment from '../Comment/Comment'
 
 export default class Card extends Component {
 
@@ -15,9 +16,7 @@ export default class Card extends Component {
       return <li className="list-group-item" key={i}>{i}</li>
     });
     return (
-      <ul className="m-2 list-group">
-        {comments}
-      </ul>
+      <Comment _id={this.props._id} />
     );
   }
 
@@ -36,8 +35,8 @@ export default class Card extends Component {
         <SlidePack className="img" setObj={this.activities()} />
         <h5 style={{marginTop: "15px"}}>Comments: </h5>
         <span>{this.listComments()}</span>
-        <input type="text" className="w-80 form-control" placeholder=" Your comment..." onChange={this.sendComment} />
-        {/* <input type="submit" value="Submit"> */}
+        {/* send commment */}
+        <Comment _id={itinerary._id}/>
       </div>
     )
   }
