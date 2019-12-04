@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Itinerary = require('../models/itinerary')
 const { check, validationResult } = require('express-validator');
 const key = require("../../nodemon.json");
 const jwt = require("jsonwebtoken");
 const passport = require('../../passport');
 const bcrypt = require('bcryptjs');
 
-router.get('/', passport.authenticate("jwt", { session: false }),
+router.get('/', /* passport.authenticate("jwt", { session: false }), */
   (req, res) => {
 
     User.find()
@@ -50,12 +51,12 @@ router.post('/add',
     }
   });
 
-  router.post('/login',
+router.post('/login',
   async function (req, res) {
     const email = req.body.email
     const password = req.body.password
     const userWithEmail = await findUserByEmail(email)
- 
+
     if (userWithEmail) {
       if (bcrypt.compareSync(password, userWithEmail.password)) {
         const payload = {
@@ -110,5 +111,77 @@ async function findUserByEmail(email) {
     throw new Error(`Unable to connect to the database.`)
   }
 }
+
+router.get('/favourite/:userId',
+  async (req, res) => {
+    let userId = req.params.userId;
+
+    const userWithId = await findUserById(userId);
+
+    if (userWithId) {
+      const userFavs = userWithId.favourites;
+      res.json(userWithId.favourites);
+    }
+  });
+
+router.post('/favourite',
+  async (req, res) => {
+    let userId = req.body.userId;
+    let itineraryId = req.body.itineraryId;
+
+    let itineraryPresent = false;
+    const userWithId = await findUserById(userId);
+
+    if (userWithId) {
+      const userFavs = userWithId.favourites;
+
+      if (userFavs.some(fav => fav._id.equals(itineraryId))) {
+        itineraryPresent = true;
+      }
+
+      if (itineraryPresent) {
+        const userFavsFiltered = userFavs.filter(fav => !(fav._id.equals(itineraryId)))
+        User.findOneAndUpdate(
+          { '_id': userId },
+          { favourites: userFavsFiltered },
+          { upsert: true },
+          function (err) {
+
+            if (err) return res.send(500, { error: err });
+            User.findOne({ '_id': userId })
+              .then(usuario => res.json(usuario.favourites))
+          })
+      }
+      else {
+        userFavs.push(itineraryId)
+
+        User.findOneAndUpdate(
+          { '_id': userId },
+          { favourites: userFavs },
+          { upsert: true },
+          function (err) {
+            if (err) return res.send(500, { error: err });
+            User.findOne({ '_id': userId })
+              .then(usuario => res.json(usuario.favourites))
+          })
+      }
+    }
+  });
+
+async function findUserById(id) {
+  try {
+    return User.findOne({ '_id': id })
+  } catch (error) {
+    throw new Error(`Unable to connect to the database.`)
+  }
+}
+
+/*async function findItineraryById(id) {
+  try {
+    return User.findOne({ '_id': id })
+  } catch (error) {
+    throw new Error(`Unable to connect to the database.`)
+  }
+} */
 
 module.exports = router;
