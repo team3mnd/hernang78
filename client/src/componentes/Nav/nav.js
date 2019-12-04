@@ -31,7 +31,7 @@ class NavbarMain extends React.Component {
     this.setState({ token });
     if (localStorage.getItem('success') === 'true') {
       const userName = tokenDecoded.username;
-      console.log(tokenDecoded)
+      // console.log(tokenDecoded)
       const imageUrl = tokenDecoded.picture
       this.setState({ imageUrl });
       this.setState({ userName })
