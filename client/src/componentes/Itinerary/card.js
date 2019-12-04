@@ -25,7 +25,7 @@ export default class Card extends Component {
     return (
       <div className='d-flex justify-content-center flex-column'>
         <SlidePack className="img" setObj={this.activities()} />
-        <ListComment comments = {this.props.comments}/>
+        {/* <ListComment comments = {this.props.comments}/> */}
         {/* send commment */}
         <Comment _id={this.props._id}/>
       </div>

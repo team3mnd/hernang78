@@ -8,14 +8,17 @@ import {sendComment} from '../../store/actions/commentActions'
 const jwt = require("jsonwebtoken");
 
 class Comment extends Component {
-  state = {
-    userName: '',
-    token: '',
-    imageUrl: '',
-    message: '',
-    date: ''
+  constructor(){
+    super();
+    this.getComment = this.getComment.bind(this);
+    this.state = {
+      userName: '',
+      token: '',
+      imageUrl: '',
+      message: '',
+      date: ''
+    }
   }
-
   componentDidMount() {
     const token = localStorage.getItem('token');
     const tokenDecoded = jwt.decode(token);
@@ -49,22 +52,22 @@ class Comment extends Component {
         {
           localStorage.getItem('success') === 'true'
             ?
-            <div className='d-flex flex-row justify-content-around align-items-center containerItinerary' >
+            <div className='d-flex flex-row justify-content-around align-items-center' >
               <div className="containerImageProfile">
                 <Image
                   src={this.state.imageUrl}
-                  style={{ width: "60px", height: "60px", borderRadius: "50%", padding: '2%' }}
+                  style={{ width: "50px", height: "50px", borderRadius: "50%", padding: '2%' }}
                   alt="imageProfile"
                 />
               </div>
-              <div className='d-flex flex-column align-items-center'>
-                <input type="text" className="w-80 form-control" placeholder=" Your comment..." value={this.state.message}
+              <div className='d-flex flex-column align-items-center p-1'>
+                <input type="text" className="input-group-text" id="inputGroup-sizing-sm" placeholder=" Your comment..." value={this.state.message}
                   onChange={e => this.setValueMessage(e.target.value)} />
                 <Button
-                  className="btn"
+                  className="btn m-1"
                   variant="primary"
                   type="button"
-                  onClick={this.getComment()}>
+                  onClick={this.getComment}>
                   Send
                 </Button>
               </div>
