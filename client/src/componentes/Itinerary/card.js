@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SlidePack from './SlidePack/SlidePack';
 import './card.css';
+import Comment from '../Comment/Comment'
 
 export default class Card extends Component {
 
@@ -32,9 +33,9 @@ export default class Card extends Component {
       <div className='d-flex justify-content-center flex-column'>
         <SlidePack className="img" setObj={this.activities()} />
         <h5 style={{ marginTop: "15px" }}>Comments: </h5>
-
         {<div><ul>{this.listComments(this.props)}</ul></div>}
-        <input type="text" className="w-80 form-control" placeholder=" Your comment..." onChange={this.sendComment} />
+        
+        <Comment _id={this.props._id}/>
       </div>
     )
   }

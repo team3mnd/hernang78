@@ -31,7 +31,7 @@ class NavbarMain extends React.Component {
     this.setState({ token });
     if (localStorage.getItem('success') === 'true') {
       const userName = tokenDecoded.username;
-      console.log(tokenDecoded)
+      // console.log(tokenDecoded)
       const imageUrl = tokenDecoded.picture
       this.setState({ imageUrl });
       this.setState({ userName })
@@ -55,7 +55,7 @@ class NavbarMain extends React.Component {
                   <div className="containerImageProfile">
                     <Image
                       src={this.state.imageUrl}
-                      style={{ width: "50px", height: "50px", borderRadius: "50%", padding: '10%' }}
+                      style={{ width: "60px", height: "60px", borderRadius: "50%", padding: '5%' }}
                       alt="imageProfile"
                     />
                   </div>

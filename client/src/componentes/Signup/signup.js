@@ -24,6 +24,7 @@ export default class Signup extends Component {
     imageProfile:
       "http://svgur.com/i/65U.svg",
     errors: "",
+    useGoogle:false,
     mostrarErrores: false
   };
 
@@ -141,8 +142,11 @@ export default class Signup extends Component {
   }
 
   renderRedirect = () => {
-    if (this.state.redirect === true) {
+    if (this.state.redirect === true && this.state.useGoogle=== false) {
       return <Redirect to='/login' />
+    }
+    if(this.state.redirect === true && this.state.useGoogle=== true){
+      return <Redirect to='/'/>
     }
   }
 
@@ -165,7 +169,8 @@ export default class Signup extends Component {
         img: profileObj.imageUrl,
         checkTC: true,
         textAddImage: 1,
-        imageProfile: profileObj.imageUrl
+        imageProfile: profileObj.imageUrl,
+        useGoogle: true
       })
       this.obtenerDatos(null)
     }
@@ -319,20 +324,20 @@ export default class Signup extends Component {
                 </Form.Text>
               </Form.Row>
             </Form.Group>
-            <div className="d-flex flex-column justify-content-center align-items-center">
+            <div className="row justify-content-center justify-content-md-start">
+              <GoogleLogin
+                clientId="748277599795-5567kmucrd0ti6fc7ip3o0lp0vt7tqdr.apps.googleusercontent.com"
+                buttonText="CREATE WITH GOOGLE"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}/>
               <Button
-                className="btn mb-2"
+                className="btn"
                 variant="primary"
                 type="submit"
                 onClick={e => this.obtenerDatos(e)}
               >
                 Submit
                 </Button>
-                <GoogleLogin
-                clientId="748277599795-5567kmucrd0ti6fc7ip3o0lp0vt7tqdr.apps.googleusercontent.com"
-                buttonText="CREATE WITH GOOGLE"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}/>
             </div>
           </Form>
         </div>

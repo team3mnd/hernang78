@@ -5,9 +5,10 @@ const uri = "mongodb+srv://admin:" + process.env.MONGO_ATLAS_PW + "@mytinerary-i
 const db = mongoose.connect(uri,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-  },()=>{
-   // console.log(mongoose.connection.collections)
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  }, () => {
+    // console.log(mongoose.connection.collections)
 
   });
 
