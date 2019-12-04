@@ -12,15 +12,15 @@ router.post('/add', async (req, res) => {
     date: Date(req.body.date) ,
     user: req.body.user}
 
-  const itinerary = await Itinerary.findById('dasfgsdgsdfg');
+  const itinerary = await Itinerary.findById(id);
   console.log(itinerary);
   if (itinerary){
     const comments = itinerary.comments;
     comments.push(addComent);
 
-    const res = await Itinerary.updateOne({_id:id},{ comments: comments });
+    const addedComment = await Itinerary.updateOne({_id:id},{ comments: comments });
 
-    if( res.n != 0 ){
+    if( addedComment.n != 0 ){
       res.json({success: 'OK', message : 'comentario agregado.'});
     }
     else{
