@@ -4,11 +4,13 @@ import Button from "react-bootstrap/Button";
 import "../Nav/NavbarMain.css";
 import "../Itinerary/Itinerary.css";
 import { connect } from "react-redux";
-import {sendComment} from '../../store/actions/commentActions'
+import { sendComment } from '../../store/actions/commentActions'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 const jwt = require("jsonwebtoken");
 
 class Comment extends Component {
-  constructor(){
+  constructor() {
     super();
     this.getComment = this.getComment.bind(this);
     this.state = {
@@ -35,14 +37,15 @@ class Comment extends Component {
     this.setState({ message: string })
   }
 
-  getComment(){
-    let comment={
+  getComment() {
+    let comment = {
       comment: this.state.message,
-      date: this.state.date,
+      date: this.setState.date,
       photo: this.state.imageUrl,
       user: this.state.userName,
-      _id : this.props._id
+      _id: this.props._id
     }
+    this.setState({ message: '' });
     this.props.commentSend(comment)
   }
 
@@ -52,7 +55,7 @@ class Comment extends Component {
         {
           localStorage.getItem('success') === 'true'
             ?
-            <div className='d-flex flex-row justify-content-around align-items-center' >
+            <div className='d-flex flex-row justify-content-center align-items-center w-100' >
               <div className="containerImageProfile">
                 <Image
                   src={this.state.imageUrl}
@@ -60,21 +63,23 @@ class Comment extends Component {
                   alt="imageProfile"
                 />
               </div>
-              <div className='d-flex flex-column align-items-center p-1'>
-                <input type="text" className="input-group-text" id="inputGroup-sizing-sm" placeholder=" Your comment..." value={this.state.message}
-                  onChange={e => this.setValueMessage(e.target.value)} />
-                <Button
-                  className="btn m-1"
-                  variant="primary"
-                  type="button"
-                  onClick={this.getComment}>
-                  Send
-                </Button>
+              <div className="input-group mb-1">
+                <input type="text" className="form-control-sm" placeholder="Your comment..." value={this.state.message}
+                  onChange={e => this.setValueMessage(e.target.value)} aria-label="Recipient's username" aria-describedby="button-addon2" />
+                <div className="input-group-append">
+                  <Button
+                    className="btn-sm"
+                    variant="primary"
+                    type="button"
+                    onClick={this.getComment}>
+                    <FontAwesomeIcon icon={faPaperPlane} />
+                  </Button>
+                </div>
               </div>
             </div>
             :
             <div>
-              <p className='text-center containerItinerary'>You have to be log to add a comment</p>
+              <p className='text-center containerItinerary'>You have to be logged in to comment</p>
             </div>
         }
       </div>
