@@ -4,9 +4,9 @@ import Form from "react-bootstrap/Form";
 import NavBar from "../Nav/nav";
 import Image from "react-bootstrap/Image";
 import "./signup.css";
-import GoogleLogin from'react-google-login';
+import GoogleLogin from 'react-google-login';
 import ModalError from "../ModalError/ModalError";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 export default class Signup extends Component {
   state = {
@@ -18,13 +18,13 @@ export default class Signup extends Component {
     lastName: "",
     country: "",
     img: "",
-    redirect:false,
+    redirect: false,
     checkTC: false,
     expandChangeImage: false,
     imageProfile:
       "http://svgur.com/i/65U.svg",
     errors: "",
-    useGoogle:false,
+    useGoogle: false,
     mostrarErrores: false
   };
 
@@ -59,7 +59,7 @@ export default class Signup extends Component {
   }
 
   obtenerDatos(e) {
-     if (e !== null) {e.preventDefault()}
+    if (e !== null) { e.preventDefault() }
     let user = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -133,7 +133,7 @@ export default class Signup extends Component {
           }
           else {
             this.setState({
-              redirect : true
+              redirect: true
             })
           }
         })
@@ -142,11 +142,11 @@ export default class Signup extends Component {
   }
 
   renderRedirect = () => {
-    if (this.state.redirect === true && this.state.useGoogle=== false) {
+    if (this.state.redirect === true && this.state.useGoogle === false) {
       return <Redirect to='/login' />
     }
-    if(this.state.redirect === true && this.state.useGoogle=== true){
-      return <Redirect to='/'/>
+    if (this.state.redirect === true && this.state.useGoogle === true) {
+      return <Redirect to='/' />
     }
   }
 
@@ -158,7 +158,7 @@ export default class Signup extends Component {
 
   render() {
     const responseGoogle = (response) => {
-       console.log(response)
+      console.log(response)
       let { profileObj } = response
       this.setState({
         user: profileObj.givenName + profileObj.familyName + profileObj.googleId,
@@ -177,7 +177,7 @@ export default class Signup extends Component {
 
     return (
       <>
-      {this.renderRedirect()}
+        {this.renderRedirect()}
         <NavBar />
         <div
           className="containerItinerary"
@@ -324,20 +324,24 @@ export default class Signup extends Component {
                 </Form.Text>
               </Form.Row>
             </Form.Group>
-            <div className="row justify-content-center justify-content-md-start">
-              <GoogleLogin
-                clientId="748277599795-5567kmucrd0ti6fc7ip3o0lp0vt7tqdr.apps.googleusercontent.com"
-                buttonText="CREATE WITH GOOGLE"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}/>
-              <Button
-                className="btn"
-                variant="primary"
-                type="submit"
-                onClick={e => this.obtenerDatos(e)}
-              >
-                Submit
+            <div className="row mt-4">
+              <div className="text-center col-12">
+                <Button
+                  className="btn"
+                  variant="primary"
+                  type="submit"
+                  onClick={e => this.obtenerDatos(e)}
+                >
+                  Submit
                 </Button>
+              </div>
+              <div className="text-center col-12">
+                <Link to="/login">
+                  <h6 className="text-primary mt-3">
+                    Or you can Login with Google
+                  </h6>
+                </Link>
+              </div>
             </div>
           </Form>
         </div>
