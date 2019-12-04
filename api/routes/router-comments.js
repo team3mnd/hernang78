@@ -4,7 +4,6 @@ const Itinerary = require('../models/itinerary');
 
 //_id, photo, user, comment, date
 router.post('/add', async (req, res) => {
-  console.log('comments/add')
   let id = req.body._id
   let addComent = {
     photo: req.body.photo,
