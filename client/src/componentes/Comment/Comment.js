@@ -33,6 +33,12 @@ class Comment extends Component {
     }
   }
 
+  componentDidUpdate(prevProps){
+    if (this.props.comments !== prevProps.comments){
+      console.log(this.props.comments);
+    }
+  }
+
   setValueMessage(string) {
     this.setState({ message: string })
   }
@@ -45,8 +51,12 @@ class Comment extends Component {
       user: this.state.userName,
       _id: this.props._id
     }
+
+    this.setState({
+      message : ''
+    })
+    this.props.updateComment(comment);
     this.setState({ message: '' });
-    this.props.commentSend(comment)
   }
 
   render() {

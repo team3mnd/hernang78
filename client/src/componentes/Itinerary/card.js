@@ -1,15 +1,35 @@
-'../../images/activities/Kikibio'
 import React, { Component } from 'react';
 import SlidePack from './SlidePack/SlidePack';
 import './card.css';
 import Comment from '../Comment/Comment'
-import ListComment from '../Comment/ListComment'
 
 export default class Card extends Component {
+
+  getComment(comment){
+
+    this.props.comments.push(comment)
+    this.setState({
+      updated : !this.state.updated
+    })
+
+  }
 
   constructor() {
     super();
     this.sendComment = this.sendComment.bind(this);
+    this.getComment = this.getComment.bind(this);
+    this.state = {
+      updated : false
+    }
+  }
+
+  listComments(comment) {
+    return comment.comments.map((comment, i) => {
+      return <li key={i} className="list-group-item">
+        <p key={i}>{comment.comment}</p>
+      </li>
+     });
+
   }
 
   activities() {
@@ -25,9 +45,10 @@ export default class Card extends Component {
     return (
       <div className='d-flex justify-content-center flex-column'>
         <SlidePack className="img" setObj={this.activities()} />
-        {/* <ListComment comments = {this.props.comments}/> */}
-        {/* send commment */}
-        <Comment _id={this.props._id}/>
+        <h5 style={{ marginTop: "15px" }}>Comments: </h5>
+        {<div><ul>{this.listComments(this.props)}</ul></div>}
+        
+        <Comment _id={this.props._id} updateComment = {this.getComment}/>
       </div>
     )
   }

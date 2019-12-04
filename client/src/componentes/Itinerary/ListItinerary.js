@@ -9,7 +9,7 @@ import { getAllItineraries } from '../../store/actions/itineraryActions.js';
 // Components
 import Itinerary from './Itinerary';
 import Loading from '../Loading';
-import NavBar from '../Nav/nav'
+import NavBar from '../Nav/nav';
 
 class ListItinerary extends Component {
   state = {
@@ -39,7 +39,7 @@ class ListItinerary extends Component {
           <>
             <div className="containerListItinerary">
               {listItinerary.map((itinerary, i) => (
-                <Itinerary key={i} itinerary={itinerary} />
+                <Itinerary key={i} itinerary={itinerary}  />
               ))}
             </div>
             <div className="d-flex justify-content-center">

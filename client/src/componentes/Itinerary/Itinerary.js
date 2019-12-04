@@ -1,14 +1,13 @@
 import React, { Component } from "react";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import "./Itinerary.css";
 import { connect } from "react-redux";
 import { postFavourites, getAllFavourites } from '../../store/actions/favouriteActions';
 
 import Card from "./card.js";
-
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 // necesario para corazon
 const jwt = require("jsonwebtoken");
