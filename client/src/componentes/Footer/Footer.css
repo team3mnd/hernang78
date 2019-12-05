@@ -1,0 +1,11 @@
+.FooterStyle {
+    /* background-color: rgb(0, 0, 0); */
+    color              : rgb(255, 255, 255);
+    text-align         : center;
+    position           : relative;
+    bottom             : 0;
+    width              : 100%;
+    clear              : both;
+    height             :2rem ;
+    padding-top: 0.5rem;
+}
