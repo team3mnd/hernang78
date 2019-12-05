@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
+//footer
+import Footer from '../Footer/Footer'
 
 // Imagenes
 import logoImage from "../../images/MYtineraryLogo.png";
@@ -21,7 +23,7 @@ export default class Home extends Component {
             className="pt-3 m-5"
             src={logoImage}
           />
-          <div className="bg-dark text-white rounded m-2">
+          <div className="w-100 bg-dark text-white m-2">
             <p className="text-center p-4">
               Find your perfect trip, designed by insiders who know and love
               their cities
@@ -46,6 +48,7 @@ export default class Home extends Component {
             <Carousel2 />
           </div>
         </div>
+        <Footer/>
       </>
     );
   }

@@ -96,7 +96,7 @@ class Login extends Component {
           <h3 className="row justify-content-center">Login</h3>
           <Form className="px-5 container-fluid h-100">
             <Form.Group controlId="user">
-              <Form.Label>email:</Form.Label>
+              <Form.Label>Email:</Form.Label>
               <Form.Control
                 type="email"
                 ref={this.textInput}

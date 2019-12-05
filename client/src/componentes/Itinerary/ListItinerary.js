@@ -42,7 +42,7 @@ class ListItinerary extends Component {
                 <Itinerary key={i} itinerary={itinerary}  />
               ))}
             </div>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center pb-3">
               <Link to="/cities">Choose another city</Link>
             </div>
           </>
