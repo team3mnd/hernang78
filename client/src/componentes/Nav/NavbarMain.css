@@ -25,3 +25,9 @@
     position: absolute;
     right: 0;
 }
+
+.containerImageProfile{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}

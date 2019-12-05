@@ -9,6 +9,7 @@ import { getAllItineraries } from '../../store/actions/itineraryActions.js';
 // Components
 import Itinerary from './Itinerary';
 import Loading from '../Loading';
+import NavBar from '../Nav/nav';
 
 class ListItinerary extends Component {
   state = {
@@ -16,7 +17,7 @@ class ListItinerary extends Component {
   }
 
   componentDidMount() {
-    this.props.setItinerary(this.props.match.url)
+    this.props.setItinerary(this.props.match.url)    
   }
 
   componentDidUpdate(prevProps){
@@ -31,16 +32,17 @@ class ListItinerary extends Component {
     const { listItinerary } = this.state
     return (
       <>
+        <NavBar />
         {this.props.loading ?
           <Loading />
           :
           <>
             <div className="containerListItinerary">
               {listItinerary.map((itinerary, i) => (
-                <Itinerary key={i} itinerary={itinerary} />
+                <Itinerary key={i} itinerary={itinerary}  />
               ))}
             </div>
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center pb-3">
               <Link to="/cities">Choose another city</Link>
             </div>
           </>

@@ -1,7 +1,7 @@
-import Carousel from 'react-bootstrap/Carousel';
-import SlidePack from '../SlidePack/SlidePack';
-import React from 'react';
-import img1 from './1.jpg';
+import Carousel from "react-bootstrap/Carousel";
+import SlidePack from "../SlidePack/SlidePack";
+import React from "react";
+import img1 from "./1.jpg";
 import img2 from "./2.jpg";
 import img3 from "./3.jpg";
 import img4 from "./4.jpg";
@@ -27,24 +27,22 @@ let backs = [
   img10,
   img11,
   img12
-]
+];
 
 export class Carousel2 extends React.Component {
   render() {
     return (
-      <div style={{background: "#343a40", padding: "10px"}}>
-        <Carousel>
-          <Carousel.Item>
-            <SlidePack setimg={ backs.slice(0, 4) } />
-          </Carousel.Item>
-          <Carousel.Item>
-            <SlidePack setimg={ backs.slice(4, 8) } />
-          </Carousel.Item>
-          <Carousel.Item>
-            <SlidePack setimg={ backs.slice(8, 12) } />
-          </Carousel.Item>
-        </Carousel>
-      </div>
+      <Carousel>
+        <Carousel.Item>
+          <SlidePack setimg={backs.slice(0, 4)} />
+        </Carousel.Item>
+        <Carousel.Item>
+          <SlidePack setimg={backs.slice(4, 8)} />
+        </Carousel.Item>
+        <Carousel.Item>
+          <SlidePack setimg={backs.slice(8, 12)} />
+        </Carousel.Item>
+      </Carousel>
     );
   }
 }

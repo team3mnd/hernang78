@@ -24,3 +24,26 @@
   color: rgb(20, 20, 20);
 }
 
+.containerCities{
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.texto-abajo{
+  position: absolute;
+  left: 13%;
+  bottom: 7%;
+  color: white;
+}
+
+.texto-centrado{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 2px #010100;
+}
+

@@ -26,7 +26,7 @@ export function getAllCities(){
   return async function(dispatch){
     try{
       const data = await getCitiesList();
-      console.log(store.getState());
+      // console.log(store.getState());
       dispatch(isFetching(false));
       let dataFetched = fetchDataCities(data);
       //console.log(dataFetched);
@@ -36,8 +36,4 @@ export function getAllCities(){
       console.error(err)
     }
   }
-
 }
-
-
-

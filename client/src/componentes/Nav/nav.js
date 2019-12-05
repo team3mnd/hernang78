@@ -9,26 +9,78 @@ import "./NavbarMain.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import Image from "react-bootstrap/Image";
 
-export default class NavbarMain extends React.Component {
+// redux
+import { connect } from "react-redux";
+// y si quiero cambios en la store los actions
+// exammple import { getAllCities } from "../../store/actions/citiesActions";
+
+const jwt = require("jsonwebtoken");
+
+class NavbarMain extends React.Component {
+  state = {
+    userName: '',
+    token: '',
+    imageUrl: ''
+  };
+
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    const tokenDecoded = jwt.decode(token);
+    this.setState({ token });
+    if (localStorage.getItem('success') === 'true') {
+      const userName = tokenDecoded.username;
+      // console.log(tokenDecoded)
+      const imageUrl = tokenDecoded.picture
+      this.setState({ imageUrl });
+      this.setState({ userName })
+    }
+  }
+
   render() {
+
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Nav className="mr-auto">
-          <NavDropdown
-            title="User"
-            id="collasible-nav-dropdown"
-            className="NavMainDrop"
-          >
-            <NavDropdown.Item className="dropdown-item" as={Link} to="/signup">
-              <FontAwesomeIcon icon={faUserCircle} />
-              <span style={{ marginLeft: "5px" }}>Create Account</span>
-            </NavDropdown.Item>
-            <NavDropdown.Item className="dropdown-item" as={Link} to="/login">
-              <FontAwesomeIcon icon={faSignInAlt} />
-              <span style={{ marginLeft: "5px" }}>Log in</span>
-            </NavDropdown.Item>
-          </NavDropdown>
+
+          {
+            localStorage.getItem('success') === 'true'
+              ?
+              <NavDropdown
+                id="collasible-nav-dropdown"
+                title={this.state.userName}
+              >
+                <NavDropdown.Item>
+                  <div className="containerImageProfile">
+                    <Image
+                      src={this.state.imageUrl}
+                      style={{ width: "60px", height: "60px", borderRadius: "50%", padding: '5%' }}
+                      alt="imageProfile"
+                    />
+                  </div>
+                </NavDropdown.Item>
+                <NavDropdown.Item className="dropdown-item" as={Link} to="/logout">
+                  <FontAwesomeIcon icon={faUserCircle} />
+                  <span style={{ marginLeft: "5px" }}>Logout</span>
+                </NavDropdown.Item>
+              </NavDropdown>
+              :
+              <NavDropdown
+                title="User"
+                id="collasible-nav-dropdown"
+                className="NavMainDrop"
+              >
+                <NavDropdown.Item className="dropdown-item" as={Link} to="/signup">
+                  <FontAwesomeIcon icon={faUserCircle} />
+                  <span style={{ marginLeft: "5px" }}>Create Account</span>
+                </NavDropdown.Item>
+                <NavDropdown.Item className="dropdown-item" as={Link} to="/login">
+                  <FontAwesomeIcon icon={faSignInAlt} />
+                  <span style={{ marginLeft: "5px" }}>Log in</span>
+                </NavDropdown.Item>
+              </NavDropdown>
+          }
         </Nav>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -51,3 +103,10 @@ export default class NavbarMain extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return ({
+    successStore: state.sesionReducer.success
+  })
+};
+export default connect(mapStateToProps)(NavbarMain);
