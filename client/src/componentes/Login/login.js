@@ -98,7 +98,7 @@ class Login extends Component {
             <Form.Group controlId="user">
               <Form.Label>email:</Form.Label>
               <Form.Control
-                type="text"
+                type="email"
                 ref={this.textInput}
                 placeholder="Enter email"
                 value={this.state.user}

@@ -85,12 +85,12 @@ class Itinerary extends Component {
         <div className="wrapperItinerary">
           <div className="profilePicture">
             <img src={itinerary.pictureId} alt="imageProfile" id="imageProfile" />
-            {itinerary.author}
+            <p className='text-break'>{itinerary.author}</p>
           </div>
           <div className="infoItinerary">
-            <div className="row">
+            <div className='d-flex flex-row'>
               <div className="col-9 p-0 pt-3 pl-3">
-                {itinerary.title}
+                <p className='font-weight-bold'>{itinerary.title}</p>
               </div>
 
               <div className="col-3">
@@ -129,7 +129,7 @@ class Itinerary extends Component {
           </button>
           </div>
           <div className="containerActivitiesExpand">
-            {expand && <Card className="viewsImg" Activities={itinerary.activities} comments={itinerary.comments} _id={itinerary._id}/>}
+            {expand && <Card className="viewsImg" Activities={itinerary.activities} comments={itinerary.comments} _id={itinerary._id} />}
           </div>
         </div>
       </div>

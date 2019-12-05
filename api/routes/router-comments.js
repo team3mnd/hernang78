@@ -12,7 +12,6 @@ router.post('/add', async (req, res) => {
     user: req.body.user}
 
   const itinerary = await Itinerary.findById(id);
-  console.log(itinerary);
   if (itinerary){
     const comments = itinerary.comments;
     comments.push(addComent);
