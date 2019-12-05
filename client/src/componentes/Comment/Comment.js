@@ -56,6 +56,7 @@ class Comment extends Component {
       message : ''
     })
     this.props.updateComment(comment);
+    this.props.commentSend(comment);
     this.setState({ message: '' });
   }
 
