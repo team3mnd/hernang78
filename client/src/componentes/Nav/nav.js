@@ -46,8 +46,8 @@ class NavbarMain extends React.Component {
 {
             localStorage.getItem('success') === 'true'
               ?
-              <div class="dropdown">
-                <a class="" type="" id="expandLogOut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div className="dropdown">
+                <a className="" type="" id="expandLogOut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div className="containerImageProfile">
                     <Image
                       src={this.state.imageUrl}
@@ -56,7 +56,7 @@ class NavbarMain extends React.Component {
                     />
                   </div>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="expandLogOut">
+                <div className="dropdown-menu" aria-labelledby="expandLogOut">
                   <NavDropdown.Item className="dropdown-item">
                     <span style={{ marginLeft: "5px" }}>¡Hi {this.state.userName}!</span>
                   </NavDropdown.Item>
