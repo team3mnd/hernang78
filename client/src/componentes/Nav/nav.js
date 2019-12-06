@@ -43,15 +43,11 @@ class NavbarMain extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Nav className="mr-auto">
-
-          {
+{
             localStorage.getItem('success') === 'true'
               ?
-              <NavDropdown
-                id="collasible-nav-dropdown"
-                title={this.state.userName}
-              >
-                <NavDropdown.Item>
+              <div class="dropdown">
+                <a class="" type="" id="expandLogOut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div className="containerImageProfile">
                     <Image
                       src={this.state.imageUrl}
@@ -59,17 +55,22 @@ class NavbarMain extends React.Component {
                       alt="imageProfile"
                     />
                   </div>
-                </NavDropdown.Item>
-                <NavDropdown.Item className="dropdown-item" as={Link} to="/logout">
-                  <FontAwesomeIcon icon={faUserCircle} />
-                  <span style={{ marginLeft: "5px" }}>Logout</span>
-                </NavDropdown.Item>
-              </NavDropdown>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="expandLogOut">
+                  <NavDropdown.Item className="dropdown-item">
+                    <span style={{ marginLeft: "5px" }}>¡Hi {this.state.userName}!</span>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item className="dropdown-item" as={Link} to="/logout">
+                    <FontAwesomeIcon icon={faUserCircle} />
+                    <span style={{ marginLeft: "5px" }}>Logout</span>
+                  </NavDropdown.Item>
+                </div>
+              </div>
               :
               <NavDropdown
                 title="User"
                 id="collasible-nav-dropdown"
-                className="NavMainDrop"
+                className="NavMainDrop m-1"
               >
                 <NavDropdown.Item className="dropdown-item" as={Link} to="/signup">
                   <FontAwesomeIcon icon={faUserCircle} />
