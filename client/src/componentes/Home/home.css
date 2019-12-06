@@ -1,5 +1,24 @@
-#imgPrimary{
-  width: 80%;
-  max-width: 600px;
+#logo{
+  height: 270px;
 }
 
+.box{
+  background: rgba(193, 43, 43, 0.8);
+  min-height: 170px;
+}
+
+.texto{
+  color: white;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 200;
+  margin-block-end: 2em;
+  font-weight: bold;
+}
+
+.icons{
+  font-size: 50px;
+  display: block;
+  
+  color: white;
+}
