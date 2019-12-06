@@ -13,7 +13,7 @@ import Login from "./componentes/Login/login";
 import Signup from "./componentes/Signup/signup";
 import ListItinerary from "./componentes/Itinerary/ListItinerary";
 import logout from "./componentes/Logout/logout";
-
+import './app.css'
 
 export default class App extends Component {
   render() {
